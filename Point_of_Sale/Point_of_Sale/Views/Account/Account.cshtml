@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row d-flex justify-content-center" style="padding-top: 200px;">
+    <div class="card">
+        <div class="card-header bg-success-origin">
+            <div class="card-title">
+                <label class="text-success">
+                    Login Details
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "formLogin" }))
+            {
+                <div class="form-group">
+                    @Html.DropDownList("UsertypeId", ViewBag.cmbUserType as SelectList, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block btn-success btn-md" value="Login" />
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,395 @@
+﻿@model Point_of_Sale.Models.tbl_User
+
+@{
+    ViewData["Title"] = "File Maintenance";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top: 60px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">User</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">File Maintenance</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fa fa-user pr-2"></i>User Details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row pl-2">
+                        <button type="button" class="btn btn-success" id="btn_add_new_user"><i class="fa fa-plus mr-2"></i>Add New User</button>
+                    </div>
+
+                    <div class="row pb-3 pt-3">
+                        <div class="col-md-12">
+                            <div class="dataTables_wrapper table-responsive dt-bootstrap4">
+                                <table id="tbl_users" class="table table-bordered table-hover text-center" style="width:100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                </div>
+            </div>
+
+        </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <!-- Modal -->
+    <div id="modal_add_user" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-md pt-5">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal_name"><i class="fa fa-user pr-2"></i>Add New User</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                @*<form id="form_member" enctype="multipart/form-data" novalidate="novalidate" class="form-horizontal">*@
+                <form id="form_user" novalidate="novalidate">
+
+                    <div class="modal-body">
+                        @Html.HiddenFor(x => x.Id)
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("First Name", new { @class = "label-control" })
+                                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                    @Html.ValidationMessageFor(x => x.FirstName)
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("Middle Name", new { @class = "label-control" })
+                                    @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                                    @Html.ValidationMessageFor(x => x.MiddleName)
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("Last Name", new { @class = "label-control" })
+                                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                    @Html.ValidationMessageFor(x => x.LastName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("User Type", new { @class = "label-control" })
+                                    @Html.DropDownList("UsertypeId", ViewBag.cmbUserType as SelectList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.UsertypeId)
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("Username", new { @class = "label-control" })
+                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Username" })
+                                    @Html.ValidationMessageFor(x => x.UserName)
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelForModel("Password", new { @class = "label-control" })
+                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
+                                    @Html.ValidationMessageFor(x => x.Password)
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-save pr-2"></i>Save</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- /.content-wrapper -->
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var Id = 0;
+
+            ValidateUser();
+            function ValidateUser() {
+                $.validator.setDefaults({
+                    submitHandler: function () {
+                        SaveUser();
+                    }
+                });
+                $('#form_user').validate({
+                    rules: {
+                        FirstName: {
+                            required: true
+                        },
+                        MiddleName: {
+                            required: true
+                        },
+                        LastName: {
+                            required: true
+                        },
+                        UsertypeId: {
+                            required: true
+                        },
+                        UserName: {
+                            required: true
+                        },
+                        Password: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        FirstName: {
+                            required: "This field is required"
+                        },
+                        MiddleName: {
+                            required: "This field is required"
+                        },
+                        LastName: {
+                            required: "This field is required"
+                        },
+                        UsertypeId: {
+                            required: "This field is required"
+                        },
+                        UserName: {
+                            required: "This field is required"
+                        },
+                        Password: {
+                            required: "This field is required"
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                        console.log(element);
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                        console.log(element);
+                    }
+                });
+            }
+
+            LoadUsers();
+            function LoadUsers() {
+                $('#tbl_users').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    processing: false,
+                    search: true,
+                    stateSave: true,
+                    info: true,
+                    searching: true,
+                    paging: true,
+                    //order: [[1, "asc"], [2, "asc"]],
+                    //lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                    ajax: {
+                        "url": "../FileMaintenance/LoadUsers",
+                        "type": "POST",
+                        "datatype": "JSON",
+                        //"success": function (res) {
+                        //    console.log(JSON.stringify(res.data));
+                        //    console.log(res.data);
+                        //}
+                    },
+                    columns:
+                        [
+                            { "data": "fullName", title: "FullName", sClass: "dt-body-center", orderable: false },
+                            { "data": "userType", title: "User Type", sClass: "dt-body-center", orderable: false },
+                            { "data": "userName", title: "User Name", sClass: "dt-body-center", orderable: false },
+                            { "data": "dateRegistered", title: "Date Registered", sClass: "dt-body-left", orderable: false },
+                            {
+                                "data": "id", title: "Action", render: function (data) {
+                                    return "<div class='row justify-content-center'>" +
+                                        "<div class='dropdown dropleft'>" +
+                                        "<button id='btnbars' type='button' class='btn btn-sm btn-success btnbars' data-toggle='dropdown'>" +
+                                        "<i class='fa fa-bars'></i>" +
+                                        "</button> <div class='dropdown-menu'>" +
+                                        "<div class='container fluid'> " +
+                                        "<a id='btnUpdate' class='btn btn-warning btn-sm fa fa-edit col-sm-12' style='margin-bottom: 3px; margin-top: 3px;'>" +
+                                        "&nbspUpdate</a>" +
+                                        "<br />" +
+                                        "<a id='btnDelete' class='btn btn-danger btn-sm fa fa-edit col-sm-12' style='margin-bottom: 3px; margin-top: 3px; color: white;'>" +
+                                        "&nbspDelete</a>" +
+                                        "</div></div></div ></div>";
+                                }
+                            }
+                        ]
+                });
+
+                $('#tbl_users tbody').off().on('click', 'tr', function (e) {
+                    e.preventDefault();
+                    if ($(e.target).is("[id^=btnUpdate],[id^=btnUpdate] i")) {
+                        UpdateUser();
+                    }
+                    else if ($(e.target).is("[id^=btnDelete],[id^=btnDelete] i")) {
+                        RemoveUser();
+                    }
+                    else if (!$(e.target).is("[id^=btnbars],[id^=btnbars] i")) {
+                        if (!$(this).hasClass("dtactive")) {
+                            $(this).parent().find("tr").removeClass("dtactive");
+                            $(this).addClass("dtactive");
+                            Id = SelectedValue("tbl_users", "id");
+                            $("[name='Id']").val(Id);
+                        } else {
+                            $(this).removeClass("dtactive");
+                            $("[name='Id']").val(0);
+                            $("#form_user").trigger("reset");
+                        }
+                    }
+                });
+            }
+
+            function UpdateUser() {
+                if ($("[name='Id']").val() != 0) {
+                    $.ajax({
+                        url: "../FileMaintenance/UpdateUser?Id= " + $("[name='Id']").val(),
+                        type: "GET",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            if (res.data != null) {
+                                $("#modal_add_user").modal("show");
+                                $("#modal_name").html("Update Item");
+                                $("[name='FirstName']").val(res.data.firstName);
+                                $("[name='MiddleName']").val(res.data.middleName);
+                                $("[name='LastName']").val(res.data.lastName);
+                                $("[name='UsertypeId']").val(res.data.usertypeId);
+                                $("[name='Password']").val(res.data.password);
+                                $("[name='UserName']").val(res.data.userName);
+                            }
+                        }
+                    });
+                }
+                else {
+                    Swal.fire('Information!', 'Please select a record first.', 'info');
+                }
+            }
+
+            function RemoveUser() {
+                if ($("[name='Id']").val() != 0) {
+                    Swal.fire({
+                        text: "Are you sure you want to delete this record?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#28a745',
+                        cancelButtonColor: '#dc3545',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '../FileMaintenance/RemoveUser?&Id=' + $("[name='Id']").val(),
+                                type: 'POST',
+                                success: function (res) {
+                                    if (res.success == true) {
+                                        Swal.fire('Success!', 'Record has been deleted.', 'success');
+                                        LoadUsers();
+                                        $("[name='Id']").val(0);
+                                    } else {
+                                        Swal.fire('Error!', res.msg, 'error');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+                else {
+                    Swal.fire('Information!', 'Please select a record first.', 'info');
+                }
+            }
+
+            $("#btn_add_new_user").click(function (e) {
+                e.preventDefault();
+                LoadUsers();
+                NewUser();
+            });
+
+            function NewUser() {
+                $("#form_user").trigger("reset");
+                $("#modal_add_user").modal("show");
+            }
+
+            function SaveUser() {
+
+                $.ajax({
+                    url: "../FileMaintenance/SaveUser",
+                    type: 'POST',
+                    data: UserDetails(),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.success == true) {
+                            Swal.fire({
+                                text: "Successfully saved.",
+                                icon: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: '#28a745',
+                                confirmButtonText: "Ok"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $("#form_user").trigger("reset");
+                                    LoadUsers();
+                                    if ($("[name='Id']").val() != 0) {
+                                        $("#modal_add_user").modal("hide");
+                                        $("#modal_name").html("Add New User");
+                                    }
+                                    $("[name='Id']").val(0);
+                                }
+                            });
+                        } else {
+                            Swal.fire("Error!", res.message, "error");
+                        }
+                    }
+                });
+            }
+
+            function UserDetails() {
+                var formData = new FormData();
+                formData.append('Id', $("[name='Id']").val());
+                formData.append('FirstName', $("[name='FirstName']").val());
+                formData.append('MiddleName', $("[name='MiddleName']").val());
+                formData.append('LastName', $("[name='LastName']").val());
+                formData.append('UsertypeId', $("[name='UsertypeId']").val());
+                formData.append('Password', $("[name='Password']").val());
+                formData.append('UserName', $("[name='UserName']").val());
+                return formData;
+            }
+
+        });
+
+        ActiveMenu("#user");
+
+    </script>
+}
+

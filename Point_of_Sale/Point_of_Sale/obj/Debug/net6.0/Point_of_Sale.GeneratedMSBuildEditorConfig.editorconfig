@@ -9,73 +9,73 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Point_of_Sale
 build_property.RootNamespace = Point_of_Sale
-build_property.ProjectDir = D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\
+build_property.ProjectDir = D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale
+build_property.MSBuildProjectDirectory = D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Account/Account.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Account/Account.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Collection/Collection.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Collection/Collection.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGVjdGlvblxDb2xsZWN0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/Bank.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/Bank.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsZU1haW50ZW5hbmNlXEJhbmsuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/User.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/User.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsZU1haW50ZW5hbmNlXFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/UserType.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/FileMaintenance/UserType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsZU1haW50ZW5hbmNlXFVzZXJUeXBlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Home/Dashboard.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Home/Home.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Home/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Inventory/Inventory.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Inventory/Inventory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEludmVudG9yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/PointOfSale/PointOfSale.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/PointOfSale/PointOfSale.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9pbnRPZlNhbGVcUG9pbnRPZlNhbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Products/ProductDetails.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Products/ProductDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Shared/_Footer.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Shared/_Header.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Shared/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Shared/_Layout.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/Shared/_SideBar.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/Shared/_SideBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlQmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/_ViewImports.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/MY PROJECTS/POINT_OF_SALE/Point_of_Sale/Point_of_Sale/Views/_ViewStart.cshtml]
+[D:/MY PROJECTS/GIT-POINT_OF_SALE/PointOfSale/Point_of_Sale/Point_of_Sale/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

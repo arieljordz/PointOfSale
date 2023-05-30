@@ -103,7 +103,7 @@ namespace Point_of_Sale.Controllers
         {
             try
             {
-                var cart = db.tbl_cart.Where(x => x.UserId == UserId).ToList();
+                var AmountTotal = 0.00M;
 
                 using (var ts = db.Database.BeginTransaction())
                 {
@@ -121,6 +121,8 @@ namespace Point_of_Sale.Controllers
                                 ts.Dispose();
                             }
                             ts.Commit();
+
+                            AmountTotal = pos.GetTotalAmount(InvoiceId);
                         }
                     }
                     catch (Exception ex)
@@ -129,7 +131,7 @@ namespace Point_of_Sale.Controllers
                         ts.Dispose();
                     }
                 }
-                return Json(new { success = true });
+                return Json(new { success = true, TotalAmount = AmountTotal });
             }
             catch (Exception ex)
             {
@@ -137,5 +139,36 @@ namespace Point_of_Sale.Controllers
             }
         }
 
+        public IActionResult GetBalance(int UserId, decimal AmountPaid)
+        {
+            try
+            {
+                decimal balance = 0.00M;
+                var invoice = db.tbl_invoice.Where(x => x.UserId == UserId && x.IsPaid == false).SingleOrDefault();
+                if (AmountPaid != 0)
+                {
+                    if (invoice != null)
+                    {
+                        balance = AmountPaid - invoice.AmountTotal;
+                        invoice.IsPaid = true;
+                        invoice.PaymentTypeId = 1;
+                        invoice.BankId = 1;
+                        invoice.AccountNumber = "1234-567-890";
+                        invoice.AmountTendered = AmountPaid;
+                        invoice.DateInvoiced = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                    return Json(new { success = true, balance = balance });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Please enter the Amount Paid." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
     }
 }

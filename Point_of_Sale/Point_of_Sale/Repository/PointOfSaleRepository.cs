@@ -18,21 +18,38 @@ namespace Point_of_Sale.Repository
 
         public int SaveInvoice(int UserId)
         {
+            int InvoiceId = 0;
             var cart = db.tbl_cart.Where(x => x.UserId == UserId).ToList();
+            var qry = db.tbl_invoice.Where(x => x.UserId == UserId && x.IsPaid == false).SingleOrDefault();
+            if (qry != null)
+            {
+                qry.PaymentTypeId = 1;
+                qry.BankId = 1;
+                qry.AccountNumber = "1234-567-890";
+                qry.AmountTendered = 0.00M;
+                qry.AmountTotal = GetTotalAmount(qry.Id) + cart.Sum(x => x.SubTotal);
+                qry.DateInvoiced = DateTime.Now;
+                db.SaveChanges();
 
-            tbl_Invoice invoice = new tbl_Invoice();
-            invoice.UserId = UserId;
-            invoice.CustomerId = UserId;
-            invoice.PaymentTypeId = 1;
-            invoice.BankId = 1;
-            invoice.AccountNumber = "1234-567-890";
-            invoice.AmountTendered = 0.00M;
-            invoice.AmountTotal = cart.Sum(x => x.SubTotal);
-            invoice.DateInvoiced = DateTime.Now;
-            db.tbl_invoice.Add(invoice);
-            db.SaveChanges();
+                InvoiceId = qry.Id;
+            }
+            else
+            {
+                tbl_Invoice invoice = new tbl_Invoice();
+                invoice.UserId = UserId;
+                invoice.CustomerId = UserId;
+                invoice.PaymentTypeId = 1;
+                invoice.BankId = 1;
+                invoice.AccountNumber = "1234-567-890";
+                invoice.AmountTendered = 0.00M;
+                invoice.AmountTotal = cart.Sum(x => x.SubTotal);
+                invoice.DateInvoiced = DateTime.Now;
+                db.tbl_invoice.Add(invoice);
+                db.SaveChanges();
 
-            return invoice.Id;
+                InvoiceId = invoice.Id;
+            }
+            return InvoiceId;
         }
 
         public bool SaveSales(int UserId, int InvoiceId)
@@ -62,6 +79,15 @@ namespace Point_of_Sale.Repository
             {
                 return false;
             }
+        }
+
+        public decimal GetTotalAmount(int InvoiceId)
+        {
+            var TotalAmount = 0.00M;
+            var invoice = db.tbl_invoice.Where(x => x.Id == InvoiceId).SingleOrDefault();
+            TotalAmount = invoice.AmountTotal;
+
+            return TotalAmount;
         }
     }
 }

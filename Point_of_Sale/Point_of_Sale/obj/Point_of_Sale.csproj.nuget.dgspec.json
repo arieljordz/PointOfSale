@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MY PROJECTS\\POINT_OF_SALE\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj": {}
+    "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj": {}
   },
   "projects": {
-    "D:\\MY PROJECTS\\POINT_OF_SALE\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj": {
+    "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MY PROJECTS\\POINT_OF_SALE\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj",
+        "projectUniqueName": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj",
         "projectName": "Point_of_Sale",
-        "projectPath": "D:\\MY PROJECTS\\POINT_OF_SALE\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj",
+        "projectPath": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj",
         "packagesPath": "C:\\Users\\ariel\\.nuget\\packages\\",
-        "outputPath": "D:\\MY PROJECTS\\POINT_OF_SALE\\Point_of_Sale\\Point_of_Sale\\obj\\",
+        "outputPath": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "Microsoft.AspNetCore.Mvc.TagHelpers": {
               "target": "Package",
               "version": "[2.2.0, )"

@@ -24,5 +24,7 @@ namespace Point_of_Sale.Models
         public decimal AmountTotal { get; set; }
 
         public DateTime DateInvoiced { get; set; }
+
+        public bool IsPaid { get; set; }
     }
 }

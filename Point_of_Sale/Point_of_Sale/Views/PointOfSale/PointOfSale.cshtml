@@ -76,7 +76,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="TotalAmount" placeholder="Total Amount" />
+                                                <input type="text" class="form-control text-right" name="TotalAmount" placeholder="Total Amount" />
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="Tax" placeholder="Tax" />
+                                                <input type="text" class="form-control text-right" name="Tax" placeholder="Tax" />
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="AmountPaid" placeholder="Paid Amount" />
+                                                <input type="text" class="form-control text-right" name="AmountPaid" placeholder="Paid Amount" />
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="Discount" placeholder="Discount" />
+                                                <input type="text" class="form-control text-right" name="Discount" placeholder="Discount" />
                                             </div>
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="Balance" placeholder="Balance" />
+                                                <input type="text" class="form-control text-right" name="Balance" placeholder="Balance" />
                                             </div>
                                         </div>
                                     </div>
@@ -145,8 +145,8 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success col-6" data-dismiss="modal"><i class="fa fa-save pr-2"></i>Get Balance</button>
-                            <button type="submit" class="btn btn-success float-right" data-dismiss="modal"><i class="fa fa-save pr-2"></i>Print Receipt</button>
+                            <button type="submit" class="btn btn-success col-6" id="btn_get_balance"><i class="fa fa-save pr-2"></i>Get Balance</button>
+                            <button type="submit" class="btn btn-success float-right" id="btn_print"><i class="fa fa-save pr-2"></i>Print Receipt</button>
                         </div>
                     </div>
                 </div>
@@ -241,13 +241,13 @@
                     columns:
                         [
                             { "data": "id", title: "", visible: false, searchable: false },
-                            { "data": "description", title: "Description", sClass: "dt-body-center", orderable: false },
-                            { "data": "brand", title: "Brand", sClass: "dt-body-center", orderable: false },
-                            { "data": "supplier", title: "Supplier", sClass: "dt-body-center", orderable: false },
-                            { "data": "quantity", title: "Quantity", sClass: "dt-body-center", orderable: false },
-                            { "data": "price", title: "Price", sClass: "dt-body-center", orderable: false },
-                            { "data": "dateAdded", title: "DateAdded", sClass: "dt-body-center", orderable: false },
-                            { "data": "dateExpired", title: "DateExpired", sClass: "dt-body-center", orderable: false },
+                            { "data": "description", title: "Description", sClass: "text-center", orderable: false },
+                            { "data": "brand", title: "Brand", sClass: "text-center", orderable: false },
+                            { "data": "supplier", title: "Supplier", sClass: "text-center", orderable: false },
+                            { "data": "quantity", title: "Quantity", sClass: "text-center", orderable: false },
+                            { "data": "price", title: "Price", sClass: "text-center", orderable: false },
+                            { "data": "dateAdded", title: "DateAdded", sClass: "text-center", orderable: false },
+                            { "data": "dateExpired", title: "DateExpired", sClass: "text-center", orderable: false },
                         ]
                 });
 
@@ -446,12 +446,46 @@
                             type: 'POST',
                             success: function (res) {
                                 if (res.success == true) {
-                                    LoadCart();
+                                    console.log(res);
+                                    $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
                                 } else {
                                     Swal.fire('Error!', res.msg, 'error');
                                 }
                             }
                         });
+                    }
+                });
+            });
+
+            $("#btn_get_balance").click(function (e) {
+                e.preventDefault();
+                console.log($("[name='AmountPaid']").val());
+                $.ajax({
+                    url: '../PointOfSale/GetBalance?&UserId=' + UserId + '&AmountPaid=' + $("[name='AmountPaid']").val(),
+                    type: 'POST',
+                    success: function (res) {
+                        if (res.success == true) {
+                            Swal.fire({
+                                text: "Print receipt?",
+                                icon: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#28a745',
+                                cancelButtonColor: '#dc3545',
+                                confirmButtonText: 'Yes'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire('Error!', "Print", 'error');
+                                }
+                                else {
+                                    Swal.fire('Error!', "No print", 'error');
+                                }
+                                $("[name='Balance']").val(TextMoneyFormat(res.balance));
+                                LoadCart();
+                            });
+
+                        } else {
+                            Swal.fire('Warning!', res.message, 'warning');
+                        }
                     }
                 });
             });

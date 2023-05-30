@@ -92,6 +92,9 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.Property<DateTime>("DateInvoiced")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PaymentTypeId")
                         .HasColumnType("int");
 

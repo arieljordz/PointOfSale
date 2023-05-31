@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\images\\img\\minus.png",
+      "PackagePath": "staticwebassets\\images\\img\\minus.png"
+    },
+    {
+      "Id": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\images\\img\\plus.png",
+      "PackagePath": "staticwebassets\\images\\img\\plus.png"
+    },
+    {
       "Id": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

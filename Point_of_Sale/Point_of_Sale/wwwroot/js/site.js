@@ -38,6 +38,11 @@ function SelectedValue(DataTableID, rowData) {
     }
 }
 
+function UnselectRow(DataTableID, RowId) {
+    var row = $("#" + DataTableID).find(".dtactive");
+    $(row).removeClass("dtactive");
+}
+
 function TextMoneyFormat(value) {
     return parseFloat(value).toLocaleString("en", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -49,8 +54,7 @@ function DateToText(jsonDate) {
         var mm = (date.getMonth() + 1).toString();
         var dd = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-        if ((date.getMonth() + 1).toString() < 10)
-        {
+        if ((date.getMonth() + 1).toString() < 10) {
             mm = "0" + (date.getMonth() + 1).toString();
         }
         var res = date.getFullYear().toString() + "-" + mm + "-" + dd;
@@ -64,4 +68,21 @@ function TotalAmountFormat(tableID, Value, ColStart) {
         .append($('<td colspan="' + ColStart + '"/>').addClass('text-right').append('TOTAL AMOUNT'))
         .append($('<td />').addClass('text-right').append(Value))
         .append($('<td />').addClass('text-center').append("")));
+}
+
+function TotalAmountFormat1(tableID, Value, ColStart) {
+    $('#' + tableID + ' tbody').append($('<tr/>')
+        .append($('<td colspan="' + ColStart + '"/>').addClass('text-right').append('TOTAL AMOUNT'))
+        .append($('<td />').addClass('text-right').append(Value)));
+}
+
+function ValidateDecimalInput(input) {
+    // Remove any non-digit characters except decimal point
+    input.value = input.value.replace(/[^0-9.]/g, '');
+
+    // Ensure there's only one decimal point
+    const decimalCount = input.value.split('.').length - 1;
+    if (decimalCount > 1) {
+        input.value = input.value.replace(/\.+$/, ''); // Remove extra decimal points
+    }
 }

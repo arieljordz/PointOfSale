@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
@@ -81,11 +82,42 @@ namespace Point_of_Sale.Repository
             }
         }
 
+        public bool DeductItem(int InvoiceId)
+        {
+            var cart = db.tbl_invoice.Where(x => x.Id == InvoiceId).SingleOrDefault();
+            try
+            {
+                var sales = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId).ToList();
+                foreach (var item in sales)
+                {
+                    var totalQty = GetAvailableItem(item.Quantity, item.ProductId);
+
+                    var product = db.tbl_item.Where(x => x.Id == item.ProductId).SingleOrDefault();
+                    product.Quantity = totalQty;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public decimal GetTotalAmount(int InvoiceId)
         {
             var TotalAmount = 0.00M;
             var invoice = db.tbl_invoice.Where(x => x.Id == InvoiceId).SingleOrDefault();
             TotalAmount = invoice.AmountTotal;
+
+            return TotalAmount;
+        }
+
+        public int GetAvailableItem(int Quantity, int ProductId)
+        {
+            var TotalAmount = 0;
+            var product = db.tbl_item.Where(x => x.Id == ProductId).SingleOrDefault();
+            TotalAmount = product.Quantity - Quantity;
 
             return TotalAmount;
         }

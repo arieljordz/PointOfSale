@@ -31,7 +31,7 @@
             <div class="row pb-3 pt-3">
                 <div class="col-md-12">
                     <div class="dataTables_wrapper table-responsive dt-bootstrap4">
-                        <table id="tbl_items" class="table table-bordered table-hover text-center" style="width:100%"></table>
+                        <table id="tbl_items" class="table table-bordered table-hover text-center table-sm" style="width:100%"></table>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                             <div class="row pb-3 pt-3">
                                 <div class="col-md-12">
                                     <div class="dataTables_wrapper table-responsive dt-bootstrap4">
-                                        <table id="tbl_cart" class="table table-bordered table-hover text-center" style="width:100%"></table>
+                                        <table id="tbl_cart" class="table table-bordered table-hover text-center table-sm" style="width:100%"></table>
                                     </div>
                                 </div>
                             </div>
@@ -65,8 +65,8 @@
                         <div class="card-header">
                             <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Checkout</h3>
                         </div>
-
                         <div class="card-body">
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group row">
@@ -76,7 +76,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="TotalAmount" placeholder="Total Amount" />
+                                                <input type="text" class="form-control text-right" name="TotalAmount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Tax" placeholder="Tax" />
+                                                <input type="text" class="form-control text-right" name="Tax" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="AmountPaid" placeholder="Paid Amount" />
+                                                <input type="text" class="form-control text-right" name="AmountPaid" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Discount" placeholder="Discount" />
+                                                <input type="text" class="form-control text-right" name="Discount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
@@ -136,17 +136,17 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Balance" placeholder="Balance" />
+                                                <input type="text" class="form-control text-right" name="Balance" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success col-6" id="btn_get_balance"><i class="fa fa-save pr-2"></i>Get Balance</button>
-                            <button type="submit" class="btn btn-success float-right" id="btn_print"><i class="fa fa-save pr-2"></i>Print Receipt</button>
+                            <button type="submit" class="btn btn-success col-12" id="btn_get_balance"><i class="fa fa-save pr-2"></i>Get Balance</button>
                         </div>
                     </div>
                 </div>
@@ -207,6 +207,33 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="modal_receipt" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-sm pt-5">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal_name"><i class="fa fa-cart-arrow-down pr-2"></i>Add to Cart</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <form id="form_cart" novalidate="novalidate">
+
+                    <div class="modal-body">
+
+                        <label>Receipt</label>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-save pr-2"></i>Print</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 <!-- /.content-wrapper -->
 @section Scripts
@@ -244,10 +271,18 @@
                             { "data": "description", title: "Description", sClass: "text-center", orderable: false },
                             { "data": "brand", title: "Brand", sClass: "text-center", orderable: false },
                             { "data": "supplier", title: "Supplier", sClass: "text-center", orderable: false },
-                            { "data": "quantity", title: "Quantity", sClass: "text-center", orderable: false },
+                            {
+                                "data": "quantity", title: "Quantity", sClass: 'text-center', "render": function (data) {
+                                    if (data <= 10) {
+                                        return '<div class="text-danger">' + data + '</div>';
+                                    }
+                                    else {
+                                        return '<div>' + data + '</div>';
+                                    }
+                                }
+                            },
                             { "data": "price", title: "Price", sClass: "text-center", orderable: false },
-                            { "data": "dateAdded", title: "DateAdded", sClass: "text-center", orderable: false },
-                            { "data": "dateExpired", title: "DateExpired", sClass: "text-center", orderable: false },
+                            { "data": "dateExpired", title: "Expiration Date", sClass: "text-center", orderable: false },
                         ]
                 });
 
@@ -314,8 +349,9 @@
                     success: function (res) {
                         if (res.success == true) {
                             $("#form_cart").trigger("reset");
-                            $("[name='Id']").val(0);
+                            UnselectRow("tbl_items", $("[name='ProductId']").val());
                             LoadCart();
+                            $("[name='Id']").val(0);
                             $("#modal_quantity").modal("hide");
                         }
                         else {
@@ -448,6 +484,7 @@
                                 if (res.success == true) {
                                     console.log(res);
                                     $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
+                                    LoadItems();
                                 } else {
                                     Swal.fire('Error!', res.msg, 'error');
                                 }
@@ -457,9 +494,48 @@
                 });
             });
 
-            $("#btn_get_balance").click(function (e) {
-                e.preventDefault();
-                console.log($("[name='AmountPaid']").val());
+            ValidateAmount();
+            function ValidateAmount() {
+                $.validator.setDefaults({
+                    submitHandler: function () {
+                        GetBalance();
+                    }
+                });
+                $('#form_cart').validate({
+                    rules: {
+                        AmountPaid: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        AmountPaid: {
+                            required: "This field is required"
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                        console.log(element);
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                        console.log(element);
+                    }
+                });
+            }
+
+            function AmountDetails() {
+                var formData = new FormData();
+                formData.append('UserId', $("[name='UserId']").val());
+                formData.append('AmountPaid', $("[name='AmountPaid']").val());
+                return formData;
+            }
+
+            function GetBalance() {
                 $.ajax({
                     url: '../PointOfSale/GetBalance?&UserId=' + UserId + '&AmountPaid=' + $("[name='AmountPaid']").val(),
                     type: 'POST',
@@ -473,14 +549,11 @@
                                 cancelButtonColor: '#dc3545',
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                if (result.isConfirmed) {
-                                    Swal.fire('Error!', "Print", 'error');
-                                }
-                                else {
-                                    Swal.fire('Error!', "No print", 'error');
-                                }
                                 $("[name='Balance']").val(TextMoneyFormat(res.balance));
                                 LoadCart();
+                                if (result.isConfirmed) {
+                                    $("#modal_receipt").modal("show");
+                                }
                             });
 
                         } else {
@@ -488,6 +561,11 @@
                         }
                     }
                 });
+            }
+
+            $("#btn_get_balance").click(function (e) {
+                e.preventDefault();
+                GetBalance();
             });
 
         });

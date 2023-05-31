@@ -9,6 +9,8 @@ namespace Point_of_Sale.Interface
 
         bool SaveSales(int UserId, int InvoiceId);
 
+        bool DeductItem(int InvoiceId);
+
         decimal GetTotalAmount(int InvoiceId);
     }
 }

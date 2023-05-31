@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
@@ -31,6 +32,28 @@ namespace Point_of_Sale.Controllers
             return LoadViews();
         }
 
+        public IActionResult LoadItems()
+        {
+            var list = db.tbl_item.ToList();
+            List<object> data = new List<object>();
+            foreach (var item in list)
+            {
+                var obj = new
+                {
+                    Id = item.Id,
+                    Description = item.Description,
+                    Brand = item.Brand,
+                    Supplier = item.Supplier,
+                    Quantity = item.Quantity,
+                    Price = item.Price.ToString(),
+                    DateExpired = item.DateExpired.ToShortDateString(),
+                };
+                data.Add(obj);
+            }
+            return Json(new { data = data });
+        }
+
+
         public IActionResult LoadCart()
         {
             var UserId = Convert.ToInt64(Request.Cookies["UserId"]);
@@ -40,11 +63,11 @@ namespace Point_of_Sale.Controllers
             List<object> data = new List<object>();
             foreach (var item in list)
             {
-                var Description = db.tbl_item.Where(x => x.Id == item.ProductId).FirstOrDefault().Description;
+                var Description = db.tbl_item.Where(x => x.Id == item.ProductId).FirstOrDefault();
                 var obj = new
                 {
                     Id = item.Id,
-                    Description = Description,
+                    Description = Description == null ? "" : Description.Description,
                     Quantity = item.Quantity,
                     Price = item.SubTotal.ToString(),
                 };
@@ -120,6 +143,12 @@ namespace Point_of_Sale.Controllers
                                 ts.Rollback();
                                 ts.Dispose();
                             }
+                            bool product = pos.DeductItem(InvoiceId);
+                            if (!product)
+                            {
+                                ts.Rollback();
+                                ts.Dispose();
+                            }
                             ts.Commit();
 
                             AmountTotal = pos.GetTotalAmount(InvoiceId);
@@ -139,22 +168,22 @@ namespace Point_of_Sale.Controllers
             }
         }
 
-        public IActionResult GetBalance(int UserId, decimal AmountPaid)
+        public IActionResult GetBalance(CheckoutDTO dto)
         {
             try
             {
                 decimal balance = 0.00M;
-                var invoice = db.tbl_invoice.Where(x => x.UserId == UserId && x.IsPaid == false).SingleOrDefault();
-                if (AmountPaid != 0)
+                var invoice = db.tbl_invoice.Where(x => x.UserId == dto.UserId && x.IsPaid == false).SingleOrDefault();
+                if (dto.AmountPaid != 0)
                 {
                     if (invoice != null)
                     {
-                        balance = AmountPaid - invoice.AmountTotal;
+                        balance = dto.AmountPaid - invoice.AmountTotal;
                         invoice.IsPaid = true;
                         invoice.PaymentTypeId = 1;
                         invoice.BankId = 1;
                         invoice.AccountNumber = "1234-567-890";
-                        invoice.AmountTendered = AmountPaid;
+                        invoice.AmountTendered = dto.AmountPaid;
                         invoice.DateInvoiced = DateTime.Now;
                         db.SaveChanges();
                     }

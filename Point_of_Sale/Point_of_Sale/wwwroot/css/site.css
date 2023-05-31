@@ -62,3 +62,47 @@ body {
 .modal-lg {
     max-width: 1140px;
 }
+
+[data-slots] {
+    font-family: monospace
+}
+
+.dataTables_wrapper table td {
+    vertical-align: middle;
+}
+
+td.plus-minus div {
+    background: url('../images/img/plus.png') no-repeat center center !important;
+    /*background-image: url('../images/img/plus.png') !important;*/
+    cursor: pointer !important;
+    background-size: 100% 100% !important;
+    width: 15px !important;
+    height: 15px !important;
+    display: inline-block !important;
+}
+
+.plus-minus ::before {
+    background-color: black !important;
+}
+
+tr.shown td.plus-minus div {
+    background: url('../images/img/minus.png') no-repeat center center !important;
+    /*background-image: url('../images/img/minus.png') !important;*/
+    background-size: 100% 100% !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.my-image {
+    background-image: url('../images/img/minus.png');
+    /* Additional CSS properties for image display */
+    background-size: cover;
+    background-position: center;
+}
+
+.my-image1 {
+    background-image: url('../lib/admin-lte/dist/img/user2-160x160.jpg');
+    /* Additional CSS properties for image display */
+    background-size: cover;
+    background-position: center;
+}

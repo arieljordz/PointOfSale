@@ -1,0 +1,196 @@
+﻿@model Point_of_Sale.Models.tbl_Item
+@{
+    ViewData["Title"] = "Inventory";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top: 60px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Inventory</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Inventory</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Inventory Details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="my-image"></div>
+                    <div class="row pb-3 pt-3">
+                        <div class="col-md-12">
+                            <div class="dataTables_wrapper table-responsive dt-bootstrap4">
+                                <table id="tbl_sales" class="table table-bordered table-hover text-center table-sm" style="width:100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                </div>
+            </div>
+
+        </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var Id = 0;
+
+            LoadSales();
+            function LoadSales() {
+                var tbl_sales = $("#tbl_sales").DataTable({
+                    destroy: true,
+                    responsive: true,
+                    processing: false,
+                    search: true,
+                    stateSave: true,
+                    info: true,
+                    searching: true,
+                    paging: true,
+                    //order: [[1, "asc"], [2, "asc"]],
+                    //lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                    ajax: {
+                        "url": "../Inventory/LoadSales",
+                        "type": "POST",
+                        "datatype": "JSON",
+                    },
+                    columns:
+                        [
+                            {
+                                "className": "plus-minus text-center",
+                                "orderable": false,
+                                "data": "HasChild",
+                                "defaultContent": "",
+                                "render": function (data) { return data == true ? "<div/>" : ""; }
+                            },
+                            { "data": "id", title: "", visible: false },
+                            { "data": "counter", title: "", visible: false },
+                            { "data": "orderNumber", title: "Order Number", sClass: "text-center", orderable: false },
+                            { "data": "accountNumber", title: "Account Number", sClass: "text-center", orderable: false },
+                            { "data": "dateInvoiced", title: "Date Invoiced", sClass: "text-center", orderable: false },
+                            { "data": "amountTotal", title: "Amount Total", sClass: "text-right", orderable: false },
+                        ],
+                    initComplete: function (setting, json) {
+                    },
+                    drawCallback: function (settings) {
+                        $('.plus-minus').off().on('click', 'div', function () {
+                            var obj = $(this);
+                            obj.parent().parent().addClass('dtactive');
+                            var tr = $(this).closest('tr');
+                            var row = tbl_sales.row(tr);
+                            console.log(row);
+                            if (!$(this).parent().parent().hasClass('shown')) {
+                                row.child('<table id="child_table' + row.data().counter + '"/>').show();
+                                var InvoiceId = row.data().id;
+                                var tbl = LoadSalesChild('child_table' + row.data().counter, InvoiceId);
+                                $(this).parent().parent().addClass('shown');
+                            }
+                            else {
+                                obj.parent().parent().removeClass('dtactive');
+                                row.child.hide();
+                                $(this).parent().parent().removeClass('shown');
+                            }
+                        });
+                        if (settings.json != undefined) {
+                            var json = settings.json;
+                            var Total = 0.00;
+                            for (var i = 0; i < json.data.length; i++) {
+                                if (json.data[i].amountTotal != null)
+                                    if (json.data[i].amountTotal.split(",").length > 2)
+                                        Total = Total + parseFloat(json.data[i].amountTotal.replace(",", ""));
+                                    else
+                                        Total = Total + parseFloat(json.data[i].amountTotal.replace(",", ""));
+                            }
+                            var TotalAmount = "";
+                            if (Total != undefined) {
+                                TotalAmount = (Total).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                                TotalAmountFormat1("tbl_sales", TotalAmount, 4);
+                            }
+                        }
+                    }
+                });
+                return tbl_sales;
+            }
+
+            function LoadSalesChild(TableId, InvoiceId) {
+                var tbl_sales_child = $("#" + TableId).DataTable({
+                    destroy: true,
+                    responsive: true,
+                    processing: false,
+                    search: true,
+                    stateSave: true,
+                    info: true,
+                    searching: true,
+                    paging: true,
+                    //order: [[1, "asc"], [2, "asc"]],
+                    //lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                    ajax: {
+                        "url": "../Inventory/LoadSalesChild?&InvoiceId=" + InvoiceId,
+                        "type": "POST",
+                        "datatype": "JSON",
+                    },
+                    drawCallback: function (settings) {
+                        if (settings.json != undefined) {
+                            var json = settings.json;
+                            var Total = 0.00;
+
+                            for (var i = 0; i < json.data.length; i++) {
+                                Total = Total + parseFloat(json.data[i].subTotal.replace(",", ""));
+                            }
+                            var TotalAmount = "";
+                            if (Total != undefined) {
+                                TotalAmount = (Total).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                                TotalAmountFormat('tbl_cart', TotalAmount, 2);
+                            }
+                        }
+                    },
+                    columns:
+                        [
+                            { "data": "id", title: "", visible: false },
+                            { "data": "description", title: "Description", sClass: "text-center", orderable: false },
+                            { "data": "quantity", title: "Quantity", sClass: "text-center", orderable: false },
+                            { "data": "subTotal", title: "SubTotal", sClass: "dt-body-left", orderable: false },
+                        ]
+                });
+                $('#' + TableId + ' tbody').off().on('click', 'tr', function (e) {
+                    e.preventDefault();
+                    if (!$(e.target).is(".mechdelete")) {
+                        if (!$(this).hasClass("dtactive")) {
+                            $(this).parent().find("tr").removeClass("dtactive");
+                            $(this).addClass("dtactive");
+                        }
+                        else {
+                            $(this).removeClass("dtactive");
+                            TableId = "";
+                        }
+                    }
+                });
+                return tbl_sales_child;
+            }
+        });
+
+        ActiveMenu("#inventory");
+
+    </script>
+}
+

@@ -60,7 +60,7 @@ namespace Point_of_Sale.Controllers
                     UserType = type == null ? "" : type,
                     UserName = item.UserName,
                     Password = item.Password,
-                    DateRegistered = item.DateRegistered.ToShortDateString(),
+                    DateRegistered = global.FormatDateMMDDYYYY(item.DateRegistered.ToShortDateString()),
                 };
                 data.Add(obj);
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models.DBContext;
+using System.Globalization;
 
 namespace Point_of_Sale.Controllers
 {
@@ -28,6 +29,28 @@ namespace Point_of_Sale.Controllers
             return LoadViews();
         }
 
+        public IActionResult LoadItems()
+        {
+            var list = db.tbl_item.ToList();
+            List<object> data = new List<object>();
+            foreach (var item in list)
+            {
+                var obj = new
+                {
+                    Id = item.Id,
+                    Description = item.Description,
+                    Brand = item.Brand,
+                    Supplier = item.Supplier,
+                    Quantity = item.Quantity,
+                    Price = item.Price.ToString(),
+                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
+                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
+                };
+                data.Add(obj);
+            }
+            return Json(new { data = data });
+        }
+
         public IActionResult LoadSales()
         {
             var list = db.tbl_invoice.ToList();
@@ -41,7 +64,7 @@ namespace Point_of_Sale.Controllers
                     AmountTotal = item.AmountTotal.ToString(),
                     OrderNumber = "000" + item.Id.ToString(),
                     AccountNumber = item.AccountNumber,
-                    DateInvoiced = item.DateInvoiced.ToShortDateString(),
+                    DateInvoiced = global.FormatDateMMDDYYYY(item.DateInvoiced.ToShortDateString()),
                     Counter = Counter,
                 };
                 data.Add(obj);

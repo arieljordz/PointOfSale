@@ -26,13 +26,25 @@
     <section class="content">
         <div class="container-fluid">
 
-            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Product Details</h3>
+                </div>
+                <div class="card-body">
 
-            <div class="row pb-3 pt-3">
-                <div class="col-md-12">
-                    <div class="dataTables_wrapper table-responsive dt-bootstrap4">
-                        <table id="tbl_items" class="table table-bordered table-hover text-center table-sm" style="width:100%"></table>
+                    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+
+                    <div class="row pb-3 pt-3">
+                        <div class="col-md-12">
+                            <div class="dataTables_wrapper table-responsive dt-bootstrap4">
+                                <table id="tbl_items" class="table table-bordered table-hover text-center table-sm" style="width:100%"></table>
+                            </div>
+                        </div>
                     </div>
+
+                </div>
+
+                <div class="card-footer">
                 </div>
             </div>
 
@@ -152,6 +164,8 @@
                 </div>
 
             </div>
+
+
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
@@ -260,10 +274,6 @@
                         "url": "../Products/LoadItems",
                         "type": "POST",
                         "datatype": "JSON",
-                        //"success": function (res) {
-                        //    console.log(JSON.stringify(res.data));
-                        //    console.log(res.data);
-                        //}
                     },
                     columns:
                         [
@@ -338,28 +348,37 @@
             }
 
             function AddToCart() {
+                var Qty_input = $("[name='Quantity']").val();
+                var Available = SelectedValue("tbl_items", "quantity");
 
-                $.ajax({
-                    url: "../PointOfSale/AddToCart",
-                    type: 'POST',
-                    data: ItemDetails(),
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (res) {
-                        if (res.success == true) {
-                            $("#form_cart").trigger("reset");
-                            UnselectRow("tbl_items", $("[name='ProductId']").val());
-                            LoadCart();
-                            $("[name='Id']").val(0);
-                            $("#modal_quantity").modal("hide");
+                if (Qty_input <= Available) {
+                    $.ajax({
+                        url: "../PointOfSale/AddToCart",
+                        type: 'POST',
+                        data: ItemDetails(),
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            if (res.success == true) {
+                                $("#form_cart").trigger("reset");
+                                UnselectRow("tbl_items", $("[name='ProductId']").val());
+                                LoadCart();
+                                $("[name='Id']").val(0);
+                                $("#modal_quantity").modal("hide");
+                            }
+                            else {
+                                Swal.fire("Error!", res.message, "error");
+                            }
                         }
-                        else {
-                            Swal.fire("Error!", res.message, "error");
-                        }
-                    }
-                });
-            }
+                    });
+
+                }
+                else
+                {
+                    Swal.fire("Warning!", "The quantity is not enough for the available item.", "warning");
+                }
+             }
 
             function ItemDetails() {
                 var formData = new FormData();
@@ -387,10 +406,6 @@
                         "url": "../PointOfSale/LoadCart",
                         "type": "POST",
                         "datatype": "JSON",
-                        //"success": function (res) {
-                        //    console.log(JSON.stringify(res.data));
-                        //    console.log(res.data);
-                        //}
                     },
                     drawCallback: function (settings) {
                         if (settings.json != undefined) {
@@ -451,7 +466,7 @@
                                 type: 'POST',
                                 success: function (res) {
                                     if (res.success == true) {
-                                        Swal.fire('Deleted!', 'Record has been deleted.', 'success')
+                                        //Swal.fire('Deleted!', 'Record has been deleted.', 'success')
                                     } else {
                                         Swal.fire('Error!', res.message, 'error')
                                     }

@@ -7,5 +7,6 @@ namespace Point_of_Sale.Interface
     {
         decimal ComputePrice(int quantity, int productId);
         decimal GetItemPrice(int productId);
+        string FormatDateMMDDYYYY(string date);
     }
 }

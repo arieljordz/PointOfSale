@@ -26,6 +26,7 @@ namespace Point_of_Sale.Repository
             }
             return TotalPrice;
         }
+        
         public decimal GetItemPrice(int productId)
         {
             decimal TotalPrice = 0.00M;
@@ -35,6 +36,13 @@ namespace Point_of_Sale.Repository
                 TotalPrice = qry.Price;
             }
             return TotalPrice;
+        }      
+        
+        public string FormatDateMMDDYYYY(string date)
+        {
+            DateTime _date = DateTime.ParseExact(date, "M/d/yyyy", CultureInfo.InvariantCulture);
+            string formattedDate = _date.ToString("MM/dd/yyyy");
+            return formattedDate;
         }
     }
 }

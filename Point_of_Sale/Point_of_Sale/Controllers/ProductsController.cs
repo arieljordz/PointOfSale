@@ -43,8 +43,8 @@ namespace Point_of_Sale.Controllers
                     Supplier = item.Supplier,
                     Quantity = item.Quantity,
                     Price = item.Price.ToString(),
-                    DateAdded = item.DateAdded.ToShortDateString(),
-                    DateExpired = item.DateExpired.ToShortDateString(),
+                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
+                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
                 };
                 data.Add(obj);
             }

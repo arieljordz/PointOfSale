@@ -228,19 +228,19 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modal_name"><i class="fa fa-cart-arrow-down pr-2"></i>Add to Cart</h4>
+                    <h4 class="modal-title" id="modal_name"><i class="fa fa-file-pdf-o pr-2"></i>Receipt</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form id="form_cart" novalidate="novalidate">
 
                     <div class="modal-body">
 
-                        <label>Receipt</label>
+                        <iframe src="" id="frame_receipt" width="100%" height="500px"></iframe>
 
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-save pr-2"></i>Print</button>
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-print pr-2"></i>Print</button>
                     </div>
                 </form>
             </div>
@@ -374,11 +374,10 @@
                     });
 
                 }
-                else
-                {
+                else {
                     Swal.fire("Warning!", "The quantity is not enough for the available item.", "warning");
                 }
-             }
+            }
 
             function ItemDetails() {
                 var formData = new FormData();
@@ -565,9 +564,29 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 $("[name='Balance']").val(TextMoneyFormat(res.balance));
+                                //console.log(res.reportPath);
                                 LoadCart();
                                 if (result.isConfirmed) {
-                                    $("#modal_receipt").modal("show");
+
+                                    //var url = "../PointOfSale/GeneratePdf";
+                                    //console.log(url);
+                                 
+
+                                    $.ajax({
+                                        url: '../PointOfSale/GeneratePdf',
+                                        type: 'POST',
+                                        success: function (res) {
+                                            console.log(res);
+
+                                            ViewReport(res, "#frame_receipt", "#modal_receipt");
+                                            //$('#frame_receipt').attr('src', res.reportPath);
+                                            //var iframe = document.getElementById('frame_receipt');
+                                            //iframe.attr("src", res.reportPath);
+                                            //iframe.src = res;
+                                        }
+                                    });
+
+                                    //$("#modal_receipt").modal("show");
                                 }
                             });
 

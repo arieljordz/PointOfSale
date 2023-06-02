@@ -95,3 +95,8 @@ function GetDateNowMMDDYYYY() {
 
     return today = mm + '/' + dd + '/' + yyyy;
 }
+
+function ViewReport(url, id, modal) {
+    $(id).attr('src', url);
+    $(modal).modal("show");
+}

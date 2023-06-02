@@ -1,4 +1,5 @@
-﻿using Point_of_Sale.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Point_of_Sale.Models;
 using System.Threading.Tasks;
 
 namespace Point_of_Sale.Interface
@@ -12,5 +13,7 @@ namespace Point_of_Sale.Interface
         bool DeductItem(int InvoiceId);
 
         decimal GetTotalAmount(int InvoiceId);
+
+        FileStreamResult GenerateReport();
     }
 }

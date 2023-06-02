@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Point_of_Sale.Interface;
@@ -11,10 +13,12 @@ namespace Point_of_Sale.Repository
     public class PointOfSaleRepository : IPointOfSale
     {
         private readonly PointOfSaleDbContext db;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public PointOfSaleRepository(PointOfSaleDbContext context)
+        public PointOfSaleRepository(PointOfSaleDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             db = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public int SaveInvoice(int UserId)
@@ -120,6 +124,38 @@ namespace Point_of_Sale.Repository
             TotalAmount = product.Quantity - Quantity;
 
             return TotalAmount;
+        }
+
+        public FileStreamResult GenerateReport()
+        {
+            // Create a new PDF document
+            iTextSharp.text.Document document = new iTextSharp.text.Document();
+
+            // Set the output file path
+            string relativePath = "reports/report.pdf";
+            relativePath = relativePath.Replace("\\", "/");
+            string outputPath = Path.Combine(_hostingEnvironment.WebRootPath, relativePath);
+
+            // Create a new PDF writer
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(outputPath, FileMode.Create));
+
+            // Open the PDF document
+            document.Open();
+
+            // Add content to the PDF document
+            document.Add(new Paragraph("Hello, World!"));
+
+            // Close the PDF document
+            document.Close();
+
+            MemoryStream stream = new MemoryStream();
+            byte[] bytes = stream.ToArray();
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Position = 0;
+
+            //return outputPath;
+
+            return new FileStreamResult(stream,"application/pdf");
         }
     }
 }

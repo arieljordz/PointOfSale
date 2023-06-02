@@ -555,3 +555,5 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.genruntimeconfig.cache
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\ref\Point_of_Sale.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\itextsharp.dll

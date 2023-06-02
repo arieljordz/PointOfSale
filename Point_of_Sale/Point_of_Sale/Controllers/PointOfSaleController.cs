@@ -3,6 +3,10 @@ using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
+//using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace Point_of_Sale.Controllers
 {
@@ -187,6 +191,12 @@ namespace Point_of_Sale.Controllers
                         invoice.DateInvoiced = DateTime.Now;
                         db.SaveChanges();
                     }
+
+                    //MemoryStream stream = new MemoryStream();
+                    //FileStreamResult reportPath = new FileStreamResult(stream, "application/pdf");
+
+                    //reportPath = pos.GenerateReport();
+
                     return Json(new { success = true, balance = balance });
                 }
                 else
@@ -198,6 +208,34 @@ namespace Point_of_Sale.Controllers
             {
                 return Json(new { success = false, message = ex.Message });
             }
+        }
+
+        public IActionResult GeneratePdf()
+        {
+            // Create a new PDF document
+            Document document = new Document();
+
+            // Create a new MemoryStream to write the PDF content
+            MemoryStream memoryStream = new MemoryStream();
+
+            // Create a PdfWriter instance to write the PDF document to the MemoryStream
+            PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+            // Open the PDF document
+            document.Open();
+
+            // Add content to the PDF document
+            document.Add(new Paragraph("Hello, World!"));
+
+            // Flush and close the PdfWriter to ensure all content is written to the MemoryStream
+            //writer.Flush();
+            //writer.Close();
+
+            // Set the position to the beginning of the MemoryStream
+            memoryStream.Position = 0;
+
+            // Return the PDF as a FileStreamResult
+            return new FileStreamResult(memoryStream, "application/pdf");
         }
     }
 }

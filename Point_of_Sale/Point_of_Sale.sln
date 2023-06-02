@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point_of_Sale", "Point_of_Sale\Point_of_Sale.csproj", "{56B72A9C-4D72-4DA7-95DF-776CDF0DD68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Point_of_Sale", "Point_of_Sale\Point_of_Sale.csproj", "{56B72A9C-4D72-4DA7-95DF-776CDF0DD68D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDLCDesign", "RDLCDesign\RDLCDesign.csproj", "{3766339F-1CFA-45A2-9D41-CCF7A2D51C3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{56B72A9C-4D72-4DA7-95DF-776CDF0DD68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56B72A9C-4D72-4DA7-95DF-776CDF0DD68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56B72A9C-4D72-4DA7-95DF-776CDF0DD68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3766339F-1CFA-45A2-9D41-CCF7A2D51C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3766339F-1CFA-45A2-9D41-CCF7A2D51C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3766339F-1CFA-45A2-9D41-CCF7A2D51C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3766339F-1CFA-45A2-9D41-CCF7A2D51C3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

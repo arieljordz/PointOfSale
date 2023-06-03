@@ -31,7 +31,11 @@
                     <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Inventory Details</h3>
                 </div>
                 <div class="card-body">
-                    <div class="my-image"></div>
+
+                    <div class="row pl-2">
+                        <button type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print mr-2"></i>Print</button>
+                    </div>
+
                     <div class="row pb-3 pt-3">
                         <div class="col-md-12">
                             <div class="dataTables_wrapper table-responsive dt-bootstrap4">
@@ -39,6 +43,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="card-footer">
@@ -48,6 +53,31 @@
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
+    <div id="modal_receipt" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-sm pt-5">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal_name"><i class="fa fa-file-pdf-o pr-2"></i>Receipt</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <form id="form_cart" novalidate="novalidate">
+
+                    <div class="modal-body">
+
+                        <iframe src="" id="frame_receipt" width="100%" height="550px"></iframe>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-print pr-2"></i>Print</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 <!-- /.content-wrapper -->
 @section Scripts
@@ -122,6 +152,13 @@
             }
 
         });
+
+        $("#btn_print").click(function (e) {
+            e.preventDefault();
+            var url = "../Reports/PreviewReceipt?&InvoiceId=1060";
+            ViewReport(url, "#frame_receipt", "#modal_receipt");
+        });
+   
 
         ActiveMenu("#inventory");
 

@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card card-secondary">
+                    <div class="card card-secondary" id="card_balance">
                         <div class="card-header">
                             <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Checkout</h3>
                         </div>
@@ -305,6 +305,7 @@
                         $("[name='ProductId']").val(SelectedValue("tbl_items", "id"));
                         $("#item_decription").html(SelectedValue("tbl_items", "description"));
                         $("#item_quantity").html(SelectedValue("tbl_items", "quantity"));
+                        $("[name='Quantity']").focus();
                     } else {
                         $(this).removeClass("dtactive");
                         $("#form_cart").trigger("reset");
@@ -365,6 +366,7 @@
                                 UnselectRow("tbl_items", $("[name='ProductId']").val());
                                 LoadCart();
                                 $("[name='Id']").val(0);
+                               
                                 $("#modal_quantity").modal("hide");
                             }
                             else {
@@ -496,12 +498,16 @@
                             type: 'POST',
                             success: function (res) {
                                 if (res.success == true) {
-                                    console.log(res);
                                     $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
                                     LoadItems();
                                 } else {
                                     Swal.fire('Error!', res.msg, 'error');
                                 }
+                                window.onload = function () {
+                                    var card = document.getElementById('card_balance');
+                                    $("[name='AmountPaid']").focus();
+                                    card.focus();
+                                };
                             }
                         });
                     }

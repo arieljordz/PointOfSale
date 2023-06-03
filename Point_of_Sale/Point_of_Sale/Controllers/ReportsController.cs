@@ -1,9 +1,12 @@
 ﻿using AspNetCore.Reporting;
 using Microsoft.AspNetCore.Mvc;
-using Point_of_Sale.DTO;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Point_of_Sale.Interface;
+using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Point_of_Sale.Controllers
 {
@@ -33,30 +36,21 @@ namespace Point_of_Sale.Controllers
             var dt = new DataTable();
 
             var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\Receipt.rdlc";
+
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-            var list = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId).ToList();
-
-            List<ReceiptDTO> objList = new List<ReceiptDTO>();
-
-            foreach (var item in list)
-            {
-                var obj = new ReceiptDTO
-                {
-                    InvoiceId = InvoiceId,
-                    Description = db.tbl_item.Where(x => x.Id == item.ProductId).FirstOrDefault().Description,
-                    Quantity = item.Quantity,
-                    SubTotal = item.SubTotal,
-                };
-                objList.Add(obj);
-            }
+            var sp_list = db.sp_receipt.FromSqlRaw("EXEC sp_receipt {0}", InvoiceId).ToList();
 
             LocalReport localReport = new LocalReport(path);
 
-            parameters.Add("rp1","Hello World! asdsadsad");
+            decimal TotalAmount = db.tbl_invoice.Where(x => x.Id == InvoiceId).FirstOrDefault().AmountTotal;
 
-            localReport.AddDataSource("DataSet1", objList);
+            parameters.Add("TotalAmount", TotalAmount.ToString());
+
+            localReport.AddDataSource("ds_receipt", sp_list);
+
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
             return File(result.MainStream, "application/pdf");
         }
 

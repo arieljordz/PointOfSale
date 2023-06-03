@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\img\minus.png" />
-    <None Include="wwwroot\images\img\plus.png" />
-    <None Include="wwwroot\reports\report.pdf" />
+    <Content Remove="wwwroot\reports\Receipt.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\img\minus.png" />
+    <None Include="wwwroot\images\img\plus.png" />
+    <None Include="wwwroot\reports\Receipt.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />

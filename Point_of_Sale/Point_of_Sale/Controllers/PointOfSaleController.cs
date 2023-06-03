@@ -177,6 +177,7 @@ namespace Point_of_Sale.Controllers
             try
             {
                 decimal balance = 0.00M;
+                int InvoiceId = 0;
                 var invoice = db.tbl_invoice.Where(x => x.UserId == dto.UserId && x.IsPaid == false).SingleOrDefault();
                 if (dto.AmountPaid != 0)
                 {
@@ -191,13 +192,8 @@ namespace Point_of_Sale.Controllers
                         invoice.DateInvoiced = DateTime.Now;
                         db.SaveChanges();
                     }
-
-                    //MemoryStream stream = new MemoryStream();
-                    //FileStreamResult reportPath = new FileStreamResult(stream, "application/pdf");
-
-                    //reportPath = pos.GenerateReport();
-
-                    return Json(new { success = true, balance = balance });
+                    InvoiceId = invoice.Id;
+                    return Json(new { success = true, balance = balance, InvoiceId = InvoiceId });
                 }
                 else
                 {

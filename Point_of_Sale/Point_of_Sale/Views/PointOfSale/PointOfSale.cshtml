@@ -235,7 +235,7 @@
 
                     <div class="modal-body">
 
-                        <iframe src="" id="frame_receipt" width="100%" height="500px"></iframe>
+                        <iframe src="" id="frame_receipt" width="100%" height="550px"></iframe>
 
                     </div>
 
@@ -568,25 +568,8 @@
                                 LoadCart();
                                 if (result.isConfirmed) {
 
-                                    //var url = "../PointOfSale/GeneratePdf";
-                                    //console.log(url);
-                                 
-
-                                    $.ajax({
-                                        url: '../PointOfSale/GeneratePdf',
-                                        type: 'POST',
-                                        success: function (res) {
-                                            console.log(res);
-
-                                            ViewReport(res, "#frame_receipt", "#modal_receipt");
-                                            //$('#frame_receipt').attr('src', res.reportPath);
-                                            //var iframe = document.getElementById('frame_receipt');
-                                            //iframe.attr("src", res.reportPath);
-                                            //iframe.src = res;
-                                        }
-                                    });
-
-                                    //$("#modal_receipt").modal("show");
+                                    var url = "../Reports/PreviewReceipt?&InvoiceId=" + res.invoiceId;
+                                    ViewReport(url, "#frame_receipt", "#modal_receipt");
                                 }
                             });
 

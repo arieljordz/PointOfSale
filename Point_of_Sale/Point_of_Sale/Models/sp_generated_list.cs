@@ -6,7 +6,7 @@ namespace Point_of_Sale.Models
     [Keyless]
     public class sp_generated_list
     {
-        public string? InvoiceId { get; set; }
+        public int InvoiceId { get; set; }
 
         public string? Description { get; set; }
 
@@ -21,5 +21,7 @@ namespace Point_of_Sale.Models
         public decimal SubTotal { get; set; }
 
         public string? DateInvoiced { get; set; }
+        public string? DateAdded { get; set; }
+        public string? DateExpired { get; set; }
     }
 }

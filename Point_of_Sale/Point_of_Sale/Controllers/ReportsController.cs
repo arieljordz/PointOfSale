@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
@@ -33,8 +34,6 @@ namespace Point_of_Sale.Controllers
             string mimtype = "";
             int extension = 1;
 
-            var dt = new DataTable();
-
             var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\Receipt.rdlc";
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -59,15 +58,11 @@ namespace Point_of_Sale.Controllers
             string mimtype = "";
             int extension = 1;
 
-            var dt = new DataTable();
-
-            var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\GeneratedList.rdlc";
-
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
             if (typeId == 1)
             {
-                //List<sp_generated_list> sp_list = new List<sp_generated_list>();
+                var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\ListOfProducts.rdlc";
 
                 var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
 
@@ -75,7 +70,7 @@ namespace Point_of_Sale.Controllers
 
                 parameters.Add("listname", "List of all Products");
 
-                localReport.AddDataSource("ds_generated_list", sp_list);
+                localReport.AddDataSource("ds_list_of_products", sp_list);
 
                 var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
 
@@ -83,13 +78,15 @@ namespace Point_of_Sale.Controllers
             }
             else if (typeId == 2)
             {
+                var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\ListOfSoldProducts.rdlc";
+
                 var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
 
                 LocalReport localReport = new LocalReport(path);
 
                 parameters.Add("listname", "List of all Products Sold");
 
-                localReport.AddDataSource("ds_generated_list", sp_list);
+                localReport.AddDataSource("ds_list_of_sold_products", sp_list);
 
                 var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
 
@@ -97,13 +94,15 @@ namespace Point_of_Sale.Controllers
             }
             else
             {
-                var sp_list = db.tbl_item.ToList();
+                var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\ListOfProducts.rdlc";
+
+                var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
 
                 LocalReport localReport = new LocalReport(path);
 
-                parameters.Add("listname", "List of all Products Sold");
+                parameters.Add("listname", "List of all Products");
 
-                localReport.AddDataSource("ds_generated_list", sp_list);
+                localReport.AddDataSource("ds_list_of_products", sp_list);
 
                 var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
 

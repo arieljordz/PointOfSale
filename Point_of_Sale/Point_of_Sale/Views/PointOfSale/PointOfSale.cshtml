@@ -79,81 +79,83 @@
                         </div>
                         <div class="card-body">
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label label-control">Total Amount:</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                            <form id="form_checkout">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label label-control">Total Amount:</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-right" name="TotalAmount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="TotalAmount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label label-control">Total Tax:</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label label-control">Total Tax:</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-right" name="Tax" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Tax" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label label-control">Paid Amount:</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label label-control">Paid Amount:</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-right" name="AmountPaid" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="AmountPaid" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label label-control">Discount:</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label label-control">Discount:</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-right" name="Discount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Discount" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group row mb-0">
-                                        <label class="col-sm-3 col-form-label label-control">Balance:</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-sm-3 col-form-label label-control">Balance:</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-right" name="Balance" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                                 </div>
-                                                <input type="text" class="form-control text-right" name="Balance" readonly="readonly" maxlength="6" placeholder="0.00" data-slots="0" data-accept="\d" size="6" oninput="ValidateDecimalInput(this)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                         </div>
 
@@ -231,7 +233,7 @@
                     <h4 class="modal-title" id="modal_name"><i class="fa fa-file-pdf-o pr-2"></i>Receipt</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                <form id="form_cart" novalidate="novalidate">
+                <form id="form_receipt" novalidate="novalidate">
 
                     <div class="modal-body">
 
@@ -378,7 +380,7 @@
                                 UnselectRow("tbl_items", $("[name='ProductId']").val());
                                 LoadCart();
                                 $("[name='Id']").val(0);
-                               
+
                                 $("#modal_quantity").modal("hide");
                             }
                             else {
@@ -584,8 +586,8 @@
                                 $("[name='Balance']").val(TextMoneyFormat(res.balance));
                                 //console.log(res.reportPath);
                                 LoadCart();
+                                $("#form_checkout").trigger("reset");
                                 if (result.isConfirmed) {
-
                                     var url = "../Reports/PreviewReceipt?&InvoiceId=" + res.invoiceId;
                                     ViewReport(url, "#frame_receipt", "#modal_receipt");
                                 }

@@ -215,15 +215,11 @@
 
             $("#btn_generate").click(function (e) {
                 e.preventDefault();
-
-                if ($("[name='filter_by']").val() == 1) {
-                    var url = "../Reports/PreviewAllProducts?&InvoiceId=1";
-                    $("#frame_products").attr('src', url);
-                }
-                else {
-                    var url = "../Reports/PreviewAllProducts?&InvoiceId=1";
-                    $("#frame_products").attr('src', url);
-                }
+                var typeId = $("[name='filter_by']").val();
+                var dateFrom = $("[name='date_from']").val();
+                var dateTo = $("[name='date_to']").val();
+                var url = "../Reports/GenerateList?&typeId=" + typeId + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo;
+                $("#frame_products").attr('src', url);
 
             });
         });

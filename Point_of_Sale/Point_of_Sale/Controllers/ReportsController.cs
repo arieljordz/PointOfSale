@@ -54,25 +54,42 @@ namespace Point_of_Sale.Controllers
             return File(result.MainStream, "application/pdf");
         }
 
-        public IActionResult PreviewAllProducts(int InvoiceId)
+        public IActionResult GenerateList(int typeId, string dateFrom, string dateTo)
         {
             string mimtype = "";
             int extension = 1;
 
             var dt = new DataTable();
 
-            var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\AllProducts.rdlc";
+            var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\GeneratedList.rdlc";
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-            if (InvoiceId == 1)
+            if (typeId == 1)
             {
+                //List<sp_generated_list> sp_list = new List<sp_generated_list>();
 
-                var sp_list = db.tbl_item.ToList();
+                var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
 
                 LocalReport localReport = new LocalReport(path);
 
-                localReport.AddDataSource("sp_allProducts", sp_list);
+                parameters.Add("listname", "List of all Products");
+
+                localReport.AddDataSource("ds_generated_list", sp_list);
+
+                var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
+                return File(result.MainStream, "application/pdf");
+            }
+            else if (typeId == 2)
+            {
+                var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
+
+                LocalReport localReport = new LocalReport(path);
+
+                parameters.Add("listname", "List of all Products Sold");
+
+                localReport.AddDataSource("ds_generated_list", sp_list);
 
                 var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
 
@@ -84,13 +101,14 @@ namespace Point_of_Sale.Controllers
 
                 LocalReport localReport = new LocalReport(path);
 
-                localReport.AddDataSource("sp_allProducts", sp_list);
+                parameters.Add("listname", "List of all Products Sold");
+
+                localReport.AddDataSource("ds_generated_list", sp_list);
 
                 var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
 
                 return File(result.MainStream, "application/pdf");
             }
-           
         }
 
     }

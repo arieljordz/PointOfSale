@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\reports\AllProducts.rdlc" />
+    <Content Remove="wwwroot\reports\GeneratedList.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\images\img\minus.png" />
     <None Include="wwwroot\images\img\plus.png" />
-    <None Include="wwwroot\reports\AllProducts.rdlc" />
+    <None Include="wwwroot\reports\GeneratedList.rdlc" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,6 +15,7 @@ namespace Point_of_Sale.Models.DBContext
         public DbSet<tbl_Cart> tbl_cart { get; set; }
         public DbSet<tbl_Inventory> tbl_inventory { get; set; }
         public DbSet<sp_receipt> sp_receipt { get; set; }
+        public DbSet<sp_receipt> sp_generated_list { get; set; }
 
     }
 }

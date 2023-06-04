@@ -255,6 +255,7 @@
     <script>
         $(document).ready(function () {
             var SalesId = 0;
+            var date = GetDateNowMMDDYYYY();
             var UserId = $("[name='UserId']").val();
 
             LoadItems();
@@ -292,7 +293,18 @@
                                 }
                             },
                             { "data": "price", title: "Price", sClass: "text-center", orderable: false },
-                            { "data": "dateExpired", title: "Expiration Date", sClass: "text-center", orderable: false },
+                            {
+                                "data": "dateExpired", title: "Expiration Date", sClass: 'text-center', "render": function (data) {
+                                    var date1 = new Date(data);
+                                    var date2 = new Date(date);
+                                    if (date1 <= date2) {
+                                        return '<div class="text-danger">' + data + '</div>';
+                                    }
+                                    else {
+                                        return '<div>' + data + '</div>';
+                                    }
+                                }
+                            },
                         ]
                 });
 

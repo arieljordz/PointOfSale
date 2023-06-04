@@ -54,5 +54,44 @@ namespace Point_of_Sale.Controllers
             return File(result.MainStream, "application/pdf");
         }
 
+        public IActionResult PreviewAllProducts(int InvoiceId)
+        {
+            string mimtype = "";
+            int extension = 1;
+
+            var dt = new DataTable();
+
+            var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\AllProducts.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (InvoiceId == 1)
+            {
+
+                var sp_list = db.tbl_item.ToList();
+
+                LocalReport localReport = new LocalReport(path);
+
+                localReport.AddDataSource("sp_allProducts", sp_list);
+
+                var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
+                return File(result.MainStream, "application/pdf");
+            }
+            else
+            {
+                var sp_list = db.tbl_item.ToList();
+
+                LocalReport localReport = new LocalReport(path);
+
+                localReport.AddDataSource("sp_allProducts", sp_list);
+
+                var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
+                return File(result.MainStream, "application/pdf");
+            }
+           
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
+using Microsoft.AspNetCore.Mvc;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
@@ -9,11 +10,13 @@ namespace Point_of_Sale.Controllers
     {
         private readonly PointOfSaleDbContext db;
         private readonly IGlobal global;
+        private readonly IProducts pro;
 
-        public ProductsController(PointOfSaleDbContext context, IGlobal global_rep)
+        public ProductsController(PointOfSaleDbContext context, IGlobal global_rep, IProducts pro_rep)
         {
             db = context;
             global = global_rep;
+            pro = pro_rep;
         }
         public IActionResult LoadViews()
         {
@@ -56,24 +59,39 @@ namespace Point_of_Sale.Controllers
         {
             try
             {
-                if (item.Id != 0)
+                using (var ts = db.Database.BeginTransaction())
                 {
-                    var qry = db.tbl_item.Where(x => x.Id == item.Id).SingleOrDefault();
-                    qry.Description = item.Description;
-                    qry.Brand = item.Brand;
-                    qry.Supplier = item.Supplier;
-                    qry.Quantity = item.Quantity;
-                    qry.Price = item.Price;
-                    qry.DateExpired = item.DateExpired;
-                    db.SaveChanges();
+                    try
+                    {
+                        if (item.Id != 0)
+                        {
+                            // Update Item
+                            tbl_Item? _Item = pro.SaveItem(item);
+                        }
+                        else
+                        {
+                            // Save Item
+                            tbl_Item? _Item = pro.SaveItem(item);
+                            if (_Item?.Id != 0)
+                            {
+                                // Save Item Details
+                                bool Dtls = pro.SaveItemDetails(_Item);
+                                if (!Dtls)
+                                {
+                                    ts.Rollback();
+                                    ts.Dispose();
+                                }
+                            }
+                        }
+                        ts.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        ts.Rollback();
+                        ts.Dispose();
+                    }
                 }
-                else
-                {
-                    item.DateAdded = DateTime.Now;
-                    db.tbl_item.Add(item);
-                    db.SaveChanges();
 
-                }
                 return Json(new { success = true });
 
             }

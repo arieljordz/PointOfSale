@@ -83,6 +83,31 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.ToTable("tbl_cart");
                 });
 
+            modelBuilder.Entity("Point_of_Sale.Models.tbl_Inventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateExpired")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_inventory");
+                });
+
             modelBuilder.Entity("Point_of_Sale.Models.tbl_Invoice", b =>
                 {
                     b.Property<int>("Id")

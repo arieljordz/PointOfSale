@@ -16,13 +16,8 @@
     <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-            <a class="nav-link text-bold text-blink">
-                Date: @ViewBag.DateNow.ToString("MMMM dd, yyyy")
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
+            <a class="nav-link text-bold">
+                <div id="time"></div> @*@ViewBag.DateNow.ToString("MMMM dd, yyyy")*@
             </a>
         </li>
     </ul>

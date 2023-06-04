@@ -27,6 +27,28 @@ body {
     }
 }
 
+.loader {
+    position: fixed;
+    top: 70%;
+    left: 47%;
+    margin-left: 0px;
+    margin-top: -200px;
+    text-align: center;
+    z-index: 9999;
+    overflow: inherit;
+    width: 100px;
+    height: 102px;
+}
+
+.loaderOverlay {
+    position: fixed;
+    left: 0px;
+    top: 30%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
 .hide-el {
     display: none !important;
 }

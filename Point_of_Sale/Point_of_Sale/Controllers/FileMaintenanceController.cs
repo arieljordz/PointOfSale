@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Versioning;
 using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
+using System.Data;
 
 namespace Point_of_Sale.Controllers
 {
@@ -24,6 +26,7 @@ namespace Point_of_Sale.Controllers
             ViewBag.DateNow = DateTime.Now;
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
+            ViewBag.UserType = Request.Cookies["UserType"];
             var userType = db.tbl_userType.OrderBy(x => x.Id).ToList();
             ViewBag.cmbUserType = new SelectList(userType, "Id", "Description");
 

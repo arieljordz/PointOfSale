@@ -9,6 +9,7 @@ namespace Point_of_Sale.Controllers
             ViewBag.DateNow = DateTime.Now;
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
+            ViewBag.UserType = Request.Cookies["UserType"];
 
             return View();
         }

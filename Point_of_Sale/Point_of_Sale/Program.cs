@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models.DBContext;

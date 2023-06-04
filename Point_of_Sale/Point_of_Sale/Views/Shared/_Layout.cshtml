@@ -32,8 +32,36 @@
 
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" onload=display_ct()>
+    <script>
 
+        function display_c() {
+            var refresh = 1000; // Refresh rate in milli seconds
+            mytime = setTimeout('display_ct()', refresh);
+            //execute_archive();
+        }
+
+        function display_ct() {
+            var strcount
+            var x = new Date();
+            var hours = x.getHours();
+            var minute = x.getMinutes();
+            var seconds = x.getSeconds();
+            var ampm = hours >= 12 ? "PM" : "AM";
+
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minute = minute > 9 ? minute : "0" + minute;
+            seconds = seconds > 9 ? seconds : "0" + seconds;
+            hours = hours > 9 ? hours : "0" + hours;
+            var datenew = days[x.getDay()] + ", " + x.getDate() + " " + months[x.getMonth()] + " " + x.getFullYear() + " " + hours + ":" + minute + ":" + seconds + " " + ampm ;
+            // var x1 = x.toUTCString();
+            document.getElementById('time').innerHTML = "Date: " + datenew;//.toUTCString();
+            tt = display_c();
+        }
+    </script>
 
     @if (ViewData["Title"].ToString() != "Login")
     {
@@ -96,5 +124,9 @@
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
+
+    <div id="loader" class="loaderOverlay" style="display: none;">
+        <img id="img-loader" style="height:15%" src="~/images/img/ajax-loading.gif" )" alt="Loading" />
+    </div>
 </body>
 </html>

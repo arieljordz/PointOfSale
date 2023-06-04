@@ -42,16 +42,25 @@ namespace Point_of_Sale.Controllers
                     Secure = true,
                     HttpOnly = true
                 };
-
+                var UserType = db.tbl_userType.Where(x => x.Id == qry.UsertypeId).FirstOrDefault().Description;
                 // Add the cookie to the response
                 Response.Cookies.Append("FullName", qry.FullName, cookieOptions);
+                Response.Cookies.Append("UserType", UserType, cookieOptions);
                 Response.Cookies.Append("UserId", qry.Id.ToString(), cookieOptions);
 
-                //return RedirectToAction("Dashboard", "Home");
-                //return RedirectToAction("ProductDetails", "Products");
-                //return RedirectToAction("User", "FileMaintenance");
-                //return RedirectToAction("PointOfSale", "PointOfSale");
-                return RedirectToAction("Inventory", "Inventory");
+                if (UsertypeId == 1)
+                {
+                    //return RedirectToAction("Dashboard", "Home");
+                    //return RedirectToAction("ProductDetails", "Products");
+                    //return RedirectToAction("User", "FileMaintenance");
+                    //return RedirectToAction("PointOfSale", "PointOfSale");
+                    //return RedirectToAction("Inventory", "Inventory");
+                    return RedirectToAction("Collection", "Collection");
+                }
+                else
+                {
+                    return RedirectToAction("PointOfSale", "PointOfSale");
+                }
             }
             else
             {

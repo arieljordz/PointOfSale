@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9/TZTysrp5vyeIs+ljVaLHaYNa/kaOtQIIlO9/r/9atYZGgEeMsHBkT27hbmx9q0CvVzl0joBLEp1VMh46Sx8Q==",
+  "dgSpecHash": "KZWRiNhW/ZqoKj9aKxukYB77bjERxLqzWrROxfANmiiofKfnmI5UkZ3QAKuZ9dJASLlLTmODZRWRdnGo9IJJ+Q==",
   "success": true,
   "projectFilePath": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\Point_of_Sale.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
+    "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\ariel\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",

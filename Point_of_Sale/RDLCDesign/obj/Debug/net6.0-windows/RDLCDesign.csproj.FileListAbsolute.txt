@@ -1,0 +1,17 @@
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\bin\Debug\net6.0-windows\RDLCDesign.exe
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\bin\Debug\net6.0-windows\RDLCDesign.deps.json
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\bin\Debug\net6.0-windows\RDLCDesign.runtimeconfig.json
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\bin\Debug\net6.0-windows\RDLCDesign.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\bin\Debug\net6.0-windows\RDLCDesign.pdb
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.csproj.AssemblyReference.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.Form1.resources
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.csproj.GenerateResource.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.GeneratedMSBuildEditorConfig.editorconfig
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.AssemblyInfoInputs.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.AssemblyInfo.cs
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.csproj.CoreCompileInputs.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\refint\RDLCDesign.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.pdb
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\RDLCDesign.genruntimeconfig.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\RDLCDesign\obj\Debug\net6.0-windows\ref\RDLCDesign.dll

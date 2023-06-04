@@ -24,6 +24,7 @@ namespace Point_of_Sale.Controllers
             ViewBag.DateNow = DateTime.Now;
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
+            ViewBag.UserType = Request.Cookies["UserType"];
             var userType = db.tbl_userType.ToList();
             ViewBag.cmbUserType = new SelectList(userType, "UsertypeId", "Description");
 

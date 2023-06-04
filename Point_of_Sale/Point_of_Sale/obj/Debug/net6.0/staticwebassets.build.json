@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UpUrCYEDbuRinGqEbF3xAam8kqmIWH2DJhZcXOcKAWk=",
+  "Hash": "SECdeDobLioFzVEijguHXYGtU3eTe9BNz+y8lVkX3uo=",
   "Source": "Point_of_Sale",
   "BasePath": "_content/Point_of_Sale",
   "Mode": "Default",
@@ -49045,21 +49045,21 @@
       "OriginalItemSpec": "wwwroot\\lib\\twitter-bootstrap\\scss\\vendor\\_rfs.scss"
     },
     {
-      "Identity": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\reports\\report.pdf",
+      "Identity": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\reports\\Receipt.rdlc",
       "SourceId": "Point_of_Sale",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\",
       "BasePath": "_content/Point_of_Sale",
-      "RelativePath": "reports/report.pdf",
+      "RelativePath": "reports/Receipt.rdlc",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\reports\\report.pdf"
+      "OriginalItemSpec": "wwwroot\\reports\\Receipt.rdlc"
     }
   ]
 }

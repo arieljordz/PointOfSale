@@ -22,6 +22,23 @@ namespace Point_of_Sale.Models.DBContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Point_of_Sale.Models.sp_receipt", b =>
+                {
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("sp_receipt");
+                });
+
             modelBuilder.Entity("Point_of_Sale.Models.tbl_Bank", b =>
                 {
                     b.Property<int>("Id")

@@ -13,6 +13,7 @@ namespace Point_of_Sale.Models.DBContext
         public DbSet<tbl_User> tbl_user { get; set; }
         public DbSet<tbl_UserType> tbl_userType { get; set; }
         public DbSet<tbl_Cart> tbl_cart { get; set; }
+        public DbSet<sp_receipt> sp_receipt { get; set; }
 
     }
 }

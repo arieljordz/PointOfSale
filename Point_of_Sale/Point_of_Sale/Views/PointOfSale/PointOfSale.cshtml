@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card card-secondary">
+                    <div class="card card-secondary" id="card_balance">
                         <div class="card-header">
                             <h3 class="card-title"><i class="fa fa-check-square-o pr-2"></i>Checkout</h3>
                         </div>
@@ -235,7 +235,7 @@
 
                     <div class="modal-body">
 
-                        <iframe src="" id="frame_receipt" width="100%" height="500px"></iframe>
+                        <iframe src="" id="frame_receipt" width="100%" height="550px"></iframe>
 
                     </div>
 
@@ -255,6 +255,7 @@
     <script>
         $(document).ready(function () {
             var SalesId = 0;
+            var date = GetDateNowMMDDYYYY();
             var UserId = $("[name='UserId']").val();
 
             LoadItems();
@@ -292,7 +293,18 @@
                                 }
                             },
                             { "data": "price", title: "Price", sClass: "text-center", orderable: false },
-                            { "data": "dateExpired", title: "Expiration Date", sClass: "text-center", orderable: false },
+                            {
+                                "data": "dateExpired", title: "Expiration Date", sClass: 'text-center', "render": function (data) {
+                                    var date1 = new Date(data);
+                                    var date2 = new Date(date);
+                                    if (date1 <= date2) {
+                                        return '<div class="text-danger">' + data + '</div>';
+                                    }
+                                    else {
+                                        return '<div>' + data + '</div>';
+                                    }
+                                }
+                            },
                         ]
                 });
 
@@ -305,6 +317,7 @@
                         $("[name='ProductId']").val(SelectedValue("tbl_items", "id"));
                         $("#item_decription").html(SelectedValue("tbl_items", "description"));
                         $("#item_quantity").html(SelectedValue("tbl_items", "quantity"));
+                        $("[name='Quantity']").focus();
                     } else {
                         $(this).removeClass("dtactive");
                         $("#form_cart").trigger("reset");
@@ -365,6 +378,7 @@
                                 UnselectRow("tbl_items", $("[name='ProductId']").val());
                                 LoadCart();
                                 $("[name='Id']").val(0);
+                               
                                 $("#modal_quantity").modal("hide");
                             }
                             else {
@@ -496,12 +510,16 @@
                             type: 'POST',
                             success: function (res) {
                                 if (res.success == true) {
-                                    console.log(res);
                                     $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
                                     LoadItems();
                                 } else {
                                     Swal.fire('Error!', res.msg, 'error');
                                 }
+                                window.onload = function () {
+                                    var card = document.getElementById('card_balance');
+                                    $("[name='AmountPaid']").focus();
+                                    card.focus();
+                                };
                             }
                         });
                     }
@@ -568,25 +586,8 @@
                                 LoadCart();
                                 if (result.isConfirmed) {
 
-                                    //var url = "../PointOfSale/GeneratePdf";
-                                    //console.log(url);
-                                 
-
-                                    $.ajax({
-                                        url: '../PointOfSale/GeneratePdf',
-                                        type: 'POST',
-                                        success: function (res) {
-                                            console.log(res);
-
-                                            ViewReport(res, "#frame_receipt", "#modal_receipt");
-                                            //$('#frame_receipt').attr('src', res.reportPath);
-                                            //var iframe = document.getElementById('frame_receipt');
-                                            //iframe.attr("src", res.reportPath);
-                                            //iframe.src = res;
-                                        }
-                                    });
-
-                                    //$("#modal_receipt").modal("show");
+                                    var url = "../Reports/PreviewReceipt?&InvoiceId=" + res.invoiceId;
+                                    ViewReport(url, "#frame_receipt", "#modal_receipt");
                                 }
                             });
 

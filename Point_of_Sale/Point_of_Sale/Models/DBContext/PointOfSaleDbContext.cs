@@ -8,6 +8,7 @@ namespace Point_of_Sale.Models.DBContext
         public DbSet<tbl_Bank> tbl_bank { get; set; }
         public DbSet<tbl_Invoice> tbl_invoice { get; set; }
         public DbSet<tbl_Item> tbl_item { get; set; }
+        public DbSet<tbl_ItemDetails> tbl_itemDetails { get; set; }
         public DbSet<tbl_PaymentType> tbl_paymentType { get; set; }
         public DbSet<tbl_Sales> tbl_sales { get; set; }
         public DbSet<tbl_User> tbl_user { get; set; }

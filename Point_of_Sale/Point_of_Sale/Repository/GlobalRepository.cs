@@ -22,7 +22,7 @@ namespace Point_of_Sale.Repository
             var qry = db.tbl_item.Where(x => x.Id == productId).SingleOrDefault();
             if (qry != null)
             {
-                TotalPrice = quantity * qry.Price;
+                //TotalPrice = quantity * qry.Price;
             }
             return TotalPrice;
         }
@@ -33,7 +33,7 @@ namespace Point_of_Sale.Repository
             var qry = db.tbl_item.Where(x => x.Id == productId).SingleOrDefault();
             if (qry != null)
             {
-                TotalPrice = qry.Price;
+                //TotalPrice = qry.Price;
             }
             return TotalPrice;
         }      

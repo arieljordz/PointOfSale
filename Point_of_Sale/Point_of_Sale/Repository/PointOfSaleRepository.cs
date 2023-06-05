@@ -97,7 +97,7 @@ namespace Point_of_Sale.Repository
                     var totalQty = GetAvailableItem(item.Quantity, item.ProductId);
 
                     var product = db.tbl_item.Where(x => x.Id == item.ProductId).SingleOrDefault();
-                    product.Quantity = totalQty;
+                    //product.Quantity = totalQty;
                     db.SaveChanges();
                 }
                 return true;
@@ -121,7 +121,7 @@ namespace Point_of_Sale.Repository
         {
             var TotalAmount = 0;
             var product = db.tbl_item.Where(x => x.Id == ProductId).SingleOrDefault();
-            TotalAmount = product.Quantity - Quantity;
+            //TotalAmount = product.Quantity - Quantity;
 
             return TotalAmount;
         }

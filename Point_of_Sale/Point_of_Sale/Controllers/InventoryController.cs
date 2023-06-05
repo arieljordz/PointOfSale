@@ -40,12 +40,12 @@ namespace Point_of_Sale.Controllers
                 {
                     Id = item.Id,
                     Description = item.Description,
-                    Brand = item.Brand,
-                    Supplier = item.Supplier,
-                    Quantity = item.Quantity,
-                    Price = item.Price.ToString(),
-                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
-                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
+                    Brand = item.BrandId,
+                    Supplier = item.SupplierId,
+                    //Quantity = item.Quantity,
+                    //Price = item.Price.ToString(),
+                    //DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
+                    //DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
                 };
                 data.Add(obj);
             }

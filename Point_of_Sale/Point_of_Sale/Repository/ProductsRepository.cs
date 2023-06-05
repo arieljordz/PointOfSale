@@ -7,6 +7,7 @@ using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
 using System.Globalization;
+using Point_of_Sale.DTO;
 
 namespace Point_of_Sale.Repository
 {
@@ -21,71 +22,121 @@ namespace Point_of_Sale.Repository
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public tbl_Item? SaveItem(tbl_Item item)
+        public List<ProductsDTO> GetItems()
         {
-            int itemId = 0;
-            if (item.Id != 0)
+            List<ProductsDTO> objList = new List<ProductsDTO>();
+
+            var list = (from a in db.tbl_item
+                        join b in db.tbl_brand on a.BrandId equals b.Id
+                        join c in db.tbl_supplier on a.SupplierId equals c.Id
+                        select new { a, b, c }).ToList();
+
+            foreach (var item in list)
             {
-                var qry = db.tbl_item.Where(x => x.Id == item.Id).SingleOrDefault();
-                if (qry != null)
+                ProductsDTO obj = new ProductsDTO()
                 {
-                    qry.Description = item.Description;
-                    qry.Brand = item.Brand;
-                    qry.Supplier = item.Supplier;
-                    qry.Quantity = item.Quantity;
-                    qry.Price = item.Price;
-                    qry.DateExpired = item.DateExpired;
-                    db.SaveChanges();
-                }
-                var dtls = db.tbl_inventory.Where(x => x.ProductId == item.Id && x.DateAdded == qry.DateAdded).SingleOrDefault();
-                if (dtls != null)
-                {
-                    dtls.DateExpired = item.DateExpired;
-                    db.SaveChanges();
-                }
-                item = qry;
+                    ProductId = item.a.Id,
+                    Description = item.a.Description,
+                    Brand = item.b.Description,
+                    Supplier = item.c.Description,
+                };
+                objList.Add(obj);
             }
-            else
-            {
-                var chk = db.tbl_item.Select(x => x.Description).ToArray();
-                if (chk.Contains(item.Description))
-                {
-                    var _item = db.tbl_item.Where(x => x.Description.Contains(item.Description)).SingleOrDefault();
-                    _item.Description = item.Description;
-                    _item.Brand = item.Brand;
-                    _item.Supplier = item.Supplier;
-                    _item.Quantity = item.Quantity;
-                    _item.Price = item.Price;
-                    _item.DateExpired = item.DateExpired;
-                    db.SaveChanges();
-                    itemId = _item.Id;
-                }
-                else
-                {
-                    item.DateAdded = DateTime.Now;
-                    db.tbl_item.Add(item);
-                    db.SaveChanges();
-                    itemId = item.Id;
-                }
-            }
-            return item;
+            return objList;
         }
 
-        public bool SaveItemDetails(tbl_Item item)
+        public List<ProductsDTO> GetItemDetails()
+        {
+            List<ProductsDTO> objList = new List<ProductsDTO>();
+
+
+            //var result = (from a in db.tbl_item
+            //             join b in db.tbl_itemDetails on a.Id equals b.ProductId
+            //             join c in db.tbl_brand on a.BrandId equals c.Id
+            //             join d in db.tbl_supplier on a.SupplierId equals d.Id
+            //             group b by a.Description into g
+            //             orderby g.Max(a => a.Description)
+            //             select new
+            //             {
+            //                 ProductId = g.Max(a => a.Id),
+            //                 Description = g.Key,
+            //                 Brand = g.Max(a => c.Description),
+            //                 Supplier = g.Max(a => d.Description),
+            //                 Quantity = g.Sum(a => a.Quantity),
+            //                 Price = g.Max(a => a.Price),
+            //                 DateAdded = g.Max(a => a.DateAdded.ToString("MM/dd/yyyy")),
+            //                 DateExpired = g.Max(a => a.DateExpired.ToString("MM/dd/yyyy"))
+            //             }).ToList();
+
+            var list = (from a in db.tbl_item
+                        join b in db.tbl_itemDetails on a.Id equals b.ProductId
+                        join c in db.tbl_brand on a.BrandId equals c.Id
+                        join d in db.tbl_supplier on a.SupplierId equals d.Id
+                        select new { a, b, c, d }).ToList();
+
+            foreach (var item in list)
+            {
+                ProductsDTO obj = new ProductsDTO()
+                {
+                    ProductId = item.a.Id,
+                    Description = item.a.Description,
+                    Brand = item.c.Description,
+                    Supplier = item.d.Description,
+                    Quantity = item.b.Quantity,
+                    Price = item.b.Price,
+                    DateAdded = item.b.DateAdded.ToShortDateString(),
+                    DateExpired = item.b.DateExpired.ToShortDateString(),
+                };
+                objList.Add(obj);
+            }
+            return objList;
+        }
+
+        public bool SaveItem(tbl_Item item)
         {
             try
             {
-                tbl_Inventory inventory = new tbl_Inventory();
-                inventory.ProductId = item.Id;
-                inventory.Quantity = item.Quantity;
-                inventory.DateExpired = item.DateExpired;
-                inventory.DateAdded = item.DateAdded;
-                db.tbl_inventory.Add(inventory);
+                if (item.Id != 0)
+                {
+                    var qry = db.tbl_item.Where(x => x.Id == item.Id).SingleOrDefault();
+                    if (qry != null)
+                    {
+                        qry.Description = item.Description;
+                        qry.BrandId = item.BrandId;
+                        qry.SupplierId = item.SupplierId;
+                        db.SaveChanges();
+                    }
+                    return true;
+                }
+                else
+                {
+                    db.tbl_item.Add(item);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool SaveItemDetails(tbl_ItemDetails item)
+        {
+            try
+            {
+                tbl_ItemDetails dtls = new tbl_ItemDetails();
+                dtls.ProductId = item.Id;
+                dtls.Quantity = item.Quantity;
+                dtls.Price = item.Price;
+                dtls.DateExpired = item.DateExpired;
+                dtls.DateAdded = DateTime.Now;
+                db.tbl_itemDetails.Add(dtls);
                 db.SaveChanges();
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

@@ -1,4 +1,4 @@
-﻿@model Point_of_Sale.Models.tbl_Item
+﻿@model Point_of_Sale.Models.tbl_ItemDetails
 @{
     ViewData["Title"] = "File Maintenance";
 }
@@ -14,8 +14,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Products</li>
+                        <li class="breadcrumb-item"><a href="#">File Maintenance</a></li>
+                        <li class="breadcrumb-item active">Product Details</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,9 +32,6 @@
                 </div>
                 @Html.HiddenFor(x => x.Id)
                 <div class="card-body">
-                    <div class="row pl-2">
-                        <button type="button" class="btn btn-success" id="btn_add_new_item"><i class="fa fa-plus mr-2"></i>Add New Item</button>
-                    </div>
 
                     <div class="row pb-3 pt-3">
                         <div class="col-md-12">
@@ -59,38 +56,14 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modal_name"><i class="fa fa-shopping-bag pr-2"></i>Add New Item</h4>
+                    <h4 class="modal-title" id="modal_name"><i class="fa fa-shopping-bag pr-2"></i>Add Quantity</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                @*<form id="form_member" enctype="multipart/form-data" novalidate="novalidate" class="form-horizontal">*@
+
                 <form id="form_item" novalidate="novalidate">
 
                     <div class="modal-body">
                         @Html.HiddenFor(x => x.Id)
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(x => x.Description, new { @class = "label-control" })
-                                    @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "Description" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(x => x.Brand, new { @class = "label-control" })
-                                    @Html.TextBoxFor(x => x.Brand, new { @class = "form-control", placeholder = "Brand" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(x => x.Supplier, new { @class = "label-control" })
-                                    @Html.TextBoxFor(x => x.Supplier, new { @class = "form-control", placeholder = "Supplier" })
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -101,12 +74,12 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     @Html.LabelFor(x => x.Price, new { @class = "label-control" })
-                                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control", placeholder = "0.00" })
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    @Html.LabelFor(x => x.DateExpired, new { @class = "label-control" })
+                                    @Html.LabelForModel("Expiration Date", new { @class = "label-control" })
                                     @Html.TextBoxFor(x => x.DateExpired, new { @class = "form-control", type = "date" })
                                 </div>
                             </div>
@@ -115,7 +88,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-save pr-2"></i>Save</button>
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-save pr-2"></i>Add</button>
                     </div>
                 </form>
             </div>
@@ -136,7 +109,7 @@
             function ValidateItem() {
                 $.validator.setDefaults({
                     submitHandler: function () {
-                        SaveItem();
+                        SaveItemDetails();
                     }
                 });
                 $('#form_item').validate({
@@ -202,8 +175,8 @@
                 });
             }
 
-            LoadItems();
-            function LoadItems() {
+            LoadItemDtls();
+            function LoadItemDtls() {
                 $('#tbl_items').DataTable({
                     destroy: true,
                     responsive: true,
@@ -216,13 +189,9 @@
                     //order: [[1, "asc"], [2, "asc"]],
                     //lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
                     ajax: {
-                        "url": "../Products/LoadItems",
+                        "url": "../Products/LoadItemDtls",
                         "type": "POST",
                         "datatype": "JSON",
-                        //"success": function (res) {
-                        //    console.log(JSON.stringify(res.data));
-                        //    console.log(res.data);
-                        //}
                     },
                     columns:
                         [
@@ -239,8 +208,8 @@
                                     }
                                 }
                             },
-                            { "data": "price", title: "Price", sClass: "text-center", orderable: false },
-                            { "data": "dateAdded", title: "DateAdded", sClass: "text-center", orderable: false },
+                            { "data": "price", title: "Price", sClass: "text-right", orderable: false },
+                            { "data": "dateAdded", title: "Date Added", sClass: "text-center", orderable: false },
                             {
                                 "data": "dateExpired", title: "Expiration Date", sClass: 'text-center', "render": function (data) {
                                     var date1 = new Date(data);
@@ -262,7 +231,7 @@
                                         "</button> <div class='dropdown-menu'>" +
                                         "<div class='container fluid'> " +
                                         "<a id='btnUpdate' class='btn btn-warning btn-sm fa fa-edit col-sm-12' style='margin-bottom: 3px; margin-top: 3px;'>" +
-                                        "&nbspUpdate</a>" +
+                                        "&nbspAdd Quantity</a>" +
                                         "<br />" +
                                         "<a id='btnDelete' class='btn btn-danger btn-sm fa fa-edit col-sm-12' style='margin-bottom: 3px; margin-top: 3px; color: white;'>" +
                                         "&nbspDelete</a>" +
@@ -275,7 +244,7 @@
                 $('#tbl_items tbody').off().on('click', 'tr', function (e) {
                     e.preventDefault();
                     if ($(e.target).is("[id^=btnUpdate],[id^=btnUpdate] i")) {
-                        UpdateItem();
+                        $("#modal_add_item").modal("show");
                     }
                     else if ($(e.target).is("[id^=btnDelete],[id^=btnDelete] i")) {
                         RemoveItem();
@@ -295,33 +264,6 @@
                 });
             }
 
-            function UpdateItem() {
-                if ($("[name='Id']").val() != 0) {
-                    $.ajax({
-                        url: "../Products/UpdateItem?Id= " + $("[name='Id']").val(),
-                        type: "GET",
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            if (res.data != null) {
-                                $("#modal_add_item").modal("show");
-                                $("#modal_name").html("Update Item");
-                                $("[name='Description']").val(res.data.description);
-                                $("[name='Brand']").val(res.data.brand);
-                                $("[name='Supplier']").val(res.data.supplier);
-                                $("[name='Quantity']").val(res.data.quantity);
-                                $("[name='Price']").val(TextMoneyFormat(res.data.price));
-                                $("[name='DateExpired']").val(DateToText(res.data.dateExpired));
-                            }
-                        }
-                    });
-                }
-                else {
-                    Swal.fire('Information!', 'Please select a record first.', 'info');
-                }
-            }
-
             function RemoveItem() {
                 if ($("[name='Id']").val() != 0) {
                     Swal.fire({
@@ -339,7 +281,7 @@
                                 success: function (res) {
                                     if (res.success == true) {
                                         Swal.fire('Success!', 'Record has been deleted.', 'success');
-                                        LoadItems();
+                                        LoadItemDtls();
                                         $("[name='Id']").val(0);
                                     } else {
                                         Swal.fire('Error!', res.msg, 'error');
@@ -354,21 +296,10 @@
                 }
             }
 
-            $("#btn_add_new_item").click(function (e) {
-                e.preventDefault();
-                LoadItems();
-                NewItem();
-            });
-
-            function NewItem() {
-                $("#form_item").trigger("reset");
-                $("#modal_add_item").modal("show");
-            }
-
-            function SaveItem() {
+            function SaveItemDetails() {
 
                 $.ajax({
-                    url: "../Products/SaveItem",
+                    url: "../Products/SaveItemDetails",
                     type: 'POST',
                     data: ItemDetails(),
                     cache: false,
@@ -385,10 +316,9 @@
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     $("#form_item").trigger("reset");
-                                    LoadItems();
+                                    LoadItemDtls();
                                     if ($("[name='Id']").val() != 0) {
                                         $("#modal_add_item").modal("hide");
-                                        $("#modal_name").html("Add New Item");
                                     }
                                     $("[name='Id']").val(0);
                                 }
@@ -403,12 +333,8 @@
             function ItemDetails() {
                 var formData = new FormData();
                 formData.append('Id', $("[name='Id']").val());
-                formData.append('Description', $("[name='Description']").val());
-                formData.append('Brand', $("[name='Brand']").val());
-                formData.append('Supplier', $("[name='Supplier']").val());
                 formData.append('Quantity', $("[name='Quantity']").val());
                 formData.append('Price', $("[name='Price']").val());
-                formData.append('DateAdded', $("[name='DateAdded']").val());
                 formData.append('DateExpired', $("[name='DateExpired']").val());
                 return formData;
             }

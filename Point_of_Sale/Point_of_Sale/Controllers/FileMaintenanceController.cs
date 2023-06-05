@@ -27,13 +27,23 @@ namespace Point_of_Sale.Controllers
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
             ViewBag.UserType = Request.Cookies["UserType"];
+
             var userType = db.tbl_userType.OrderBy(x => x.Id).ToList();
             ViewBag.cmbUserType = new SelectList(userType, "Id", "Description");
+
+            var brand = db.tbl_brand.OrderBy(x => x.Id).ToList();
+            ViewBag.cmbBrand = new SelectList(brand, "Id", "Description");
+
+            var supplier = db.tbl_supplier.OrderBy(x => x.Id).ToList();
+            ViewBag.cmbSupplier = new SelectList(supplier, "Id", "Description");
 
             return View();
         }
 
-
+        public IActionResult Products()
+        {
+            return LoadViews();
+        }
         public IActionResult ProductDetails()
         {
             return LoadViews();

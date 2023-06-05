@@ -25,60 +25,39 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fa fa-shopping-bag"></i>
+                    
+                    <li class="nav-item">
+                        <a id="dashboard" href="@Url.Content("~/Home/Dashboard")" class="nav-link">
+                            <i class="nav-icon fa fa-bar-chart"></i>
                             <p>
-                                Products
-                                <i class="right fas fa-angle-left"></i>
+                                Dashboard
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a id="dashboard" href="@Url.Content("~/Home/Dashboard")" class="nav-link active">
-                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="product_details" href="@Url.Content("~/Products/ProductDetails")" class="nav-link">
-                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
-                                    <p>Product Details</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
-
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a id="point_of_sale" href="@Url.Content("~/PointOfSale/PointOfSale")" class="nav-link">
                             <i class="nav-icon fa fa-shopping-cart"></i>
                             <p>
-                                Transaction
-                                <i class="right fas fa-angle-left"></i>
+                                Point of Sale
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: none;">
-                            <li class="nav-item">
-                                <a id="point_of_sale" href="@Url.Content("~/PointOfSale/PointOfSale")" class="nav-link">
-                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
-                                    <p>Point of Sale</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="inventory" href="@Url.Content("~/Inventory/Inventory")" class="nav-link">
-                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
-                                    <p>Inventory</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="collection" href="@Url.Content("~/Collection/Collection")" class="nav-link">
-                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
-                                    <p>Collection</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a id="inventory" href="@Url.Content("~/Inventory/Inventory")" class="nav-link">
+                            <i class="nav-icon fa fa-database"></i>
+                            <p>
+                                Inventory
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="collection" href="@Url.Content("~/Collection/Collection")" class="nav-link">
+                            <i class="nav-icon fa fa-money"></i>
+                            <p>
+                                Collection
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-folder-open-o"></i>
@@ -88,6 +67,24 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a id="product_details" href="@Url.Content("~/FileMaintenance/ProductDetails")" class="nav-link">
+                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
+                                    <p>Products</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="brand" href="@Url.Content("~/FileMaintenance/Brand")" class="nav-link">
+                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
+                                    <p>Brand</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="supplier" href="@Url.Content("~/FileMaintenance/Supplier")" class="nav-link">
+                                    <i class="fa fa-arrow-right nav-icon ml-2"></i>
+                                    <p>Supplier</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a id="user" href="@Url.Content("~/FileMaintenance/User")" class="nav-link">
                                     <i class="fa fa-arrow-right nav-icon ml-2"></i>

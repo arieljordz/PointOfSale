@@ -47,10 +47,26 @@ namespace Point_of_Sale.Repository
             }
             else
             {
-                item.DateAdded = DateTime.Now;
-                db.tbl_item.Add(item);
-                db.SaveChanges();
-                itemId = item.Id;
+                var chk = db.tbl_item.Select(x => x.Description).ToArray();
+                if (chk.Contains(item.Description))
+                {
+                    var _item = db.tbl_item.Where(x => x.Description.Contains(item.Description)).SingleOrDefault();
+                    _item.Description = item.Description;
+                    _item.Brand = item.Brand;
+                    _item.Supplier = item.Supplier;
+                    _item.Quantity = item.Quantity;
+                    _item.Price = item.Price;
+                    _item.DateExpired = item.DateExpired;
+                    db.SaveChanges();
+                    itemId = _item.Id;
+                }
+                else
+                {
+                    item.DateAdded = DateTime.Now;
+                    db.tbl_item.Add(item);
+                    db.SaveChanges();
+                    itemId = item.Id;
+                }
             }
             return item;
         }

@@ -8,6 +8,7 @@ using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
 using System.Globalization;
 using Point_of_Sale.DTO;
+using System.Drawing.Drawing2D;
 
 namespace Point_of_Sale.Repository
 {
@@ -49,43 +50,26 @@ namespace Point_of_Sale.Repository
         {
             List<ProductsDTO> objList = new List<ProductsDTO>();
 
+            var list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list").ToList();
 
-            //var result = (from a in db.tbl_item
-            //             join b in db.tbl_itemDetails on a.Id equals b.ProductId
-            //             join c in db.tbl_brand on a.BrandId equals c.Id
-            //             join d in db.tbl_supplier on a.SupplierId equals d.Id
-            //             group b by a.Description into g
-            //             orderby g.Max(a => a.Description)
-            //             select new
-            //             {
-            //                 ProductId = g.Max(a => a.Id),
-            //                 Description = g.Key,
-            //                 Brand = g.Max(a => c.Description),
-            //                 Supplier = g.Max(a => d.Description),
-            //                 Quantity = g.Sum(a => a.Quantity),
-            //                 Price = g.Max(a => a.Price),
-            //                 DateAdded = g.Max(a => a.DateAdded.ToString("MM/dd/yyyy")),
-            //                 DateExpired = g.Max(a => a.DateExpired.ToString("MM/dd/yyyy"))
-            //             }).ToList();
-
-            var list = (from a in db.tbl_item
-                        join b in db.tbl_itemDetails on a.Id equals b.ProductId
-                        join c in db.tbl_brand on a.BrandId equals c.Id
-                        join d in db.tbl_supplier on a.SupplierId equals d.Id
-                        select new { a, b, c, d }).ToList();
+            //var list = (from a in db.tbl_item
+            //            join b in db.tbl_itemDetails on a.Id equals b.ProductId
+            //            join c in db.tbl_brand on a.BrandId equals c.Id
+            //            join d in db.tbl_supplier on a.SupplierId equals d.Id
+            //            select new { a, b, c, d }).ToList();
 
             foreach (var item in list)
             {
                 ProductsDTO obj = new ProductsDTO()
                 {
-                    ProductId = item.a.Id,
-                    Description = item.a.Description,
-                    Brand = item.c.Description,
-                    Supplier = item.d.Description,
-                    Quantity = item.b.Quantity,
-                    Price = item.b.Price,
-                    DateAdded = item.b.DateAdded.ToShortDateString(),
-                    DateExpired = item.b.DateExpired.ToShortDateString(),
+                    //ProductId = item.,
+                    //Description = item.Description,
+                    //Brand = item.c.Description,
+                    //Supplier = item.d.Description,
+                    //Quantity = item.b.Quantity,
+                    //Price = item.b.Price,
+                    //DateAdded = item.b.DateAdded.ToShortDateString(),
+                    //DateExpired = item.b.DateExpired.ToShortDateString(),
                 };
                 objList.Add(obj);
             }

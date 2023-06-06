@@ -57,6 +57,32 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.ToTable("sp_generated_list");
                 });
 
+            modelBuilder.Entity("Point_of_Sale.Models.sp_get_items", b =>
+                {
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateAdded")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateExpired")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("sp_get_items");
+                });
+
             modelBuilder.Entity("Point_of_Sale.Models.sp_receipt", b =>
                 {
                     b.Property<string>("Description")

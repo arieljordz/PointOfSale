@@ -37,28 +37,6 @@ namespace Point_of_Sale.Controllers
             return LoadViews();
         }
 
-        public IActionResult LoadItems()
-        {
-            var list = db.tbl_item.ToList();
-            List<object> data = new List<object>();
-            foreach (var item in list)
-            {
-                var obj = new
-                {
-                    Id = item.Id,
-                    Description = item.Description,
-                    Brand = item.BrandId,
-                    Supplier = item.SupplierId,
-                    //Quantity = item.Quantity,
-                    //Price = item.Price.ToString(),
-                    //DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
-                };
-                data.Add(obj);
-            }
-            return Json(new { data = data });
-        }
-
-
         public IActionResult LoadCart()
         {
             var UserId = Convert.ToInt64(Request.Cookies["UserId"]);

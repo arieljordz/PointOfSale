@@ -9,6 +9,8 @@ using Point_of_Sale.Models.DBContext;
 using System.Globalization;
 using Point_of_Sale.DTO;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
+using NuGet.Protocol.Core.Types;
 
 namespace Point_of_Sale.Repository
 {
@@ -46,30 +48,30 @@ namespace Point_of_Sale.Repository
             return objList;
         }
 
+        public IEnumerable<sp_get_items> Exec_sp_get_items()
+        {
+            string storedProcedureName = "sp_get_items";
+            return db.sp_get_items.FromSqlRaw<sp_get_items>(storedProcedureName);
+        }
+
         public List<ProductsDTO> GetItemDetails()
         {
             List<ProductsDTO> objList = new List<ProductsDTO>();
 
-            var list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list").ToList();
-
-            //var list = (from a in db.tbl_item
-            //            join b in db.tbl_itemDetails on a.Id equals b.ProductId
-            //            join c in db.tbl_brand on a.BrandId equals c.Id
-            //            join d in db.tbl_supplier on a.SupplierId equals d.Id
-            //            select new { a, b, c, d }).ToList();
+            IEnumerable<sp_get_items> list = Exec_sp_get_items();
 
             foreach (var item in list)
             {
                 ProductsDTO obj = new ProductsDTO()
                 {
-                    //ProductId = item.,
-                    //Description = item.Description,
-                    //Brand = item.c.Description,
-                    //Supplier = item.d.Description,
-                    //Quantity = item.b.Quantity,
-                    //Price = item.b.Price,
-                    //DateAdded = item.b.DateAdded.ToShortDateString(),
-                    //DateExpired = item.b.DateExpired.ToShortDateString(),
+                    ProductId = item.ProductId,
+                    Description = item.Description,
+                    Brand = item.Brand,
+                    Supplier = item.Supplier,
+                    Quantity = item.Quantity,
+                    Price = item.Price,
+                    DateAdded = item.DateAdded,
+                    DateExpired = item.DateExpired,
                 };
                 objList.Add(obj);
             }

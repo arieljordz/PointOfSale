@@ -5,6 +5,7 @@ using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace Point_of_Sale.Controllers
 {
@@ -42,24 +43,43 @@ namespace Point_of_Sale.Controllers
 
         public IActionResult LoadItemDtls()
         {
-            var list = pro.GetItemDetails();
-
             List<object> data = new List<object>();
+            //var list = pro.GetItemDetails();
 
-            if (list.Count() != 0)
+            var _list = db.tbl_item.ToList();
+
+            if (_list != null)
             {
-                foreach (var item in list)
+                var ItemDetails = pro.GetItemDetails();
+
+                var _itemList = (from a in _list
+                                 join b in ItemDetails on a.Id equals b.ProductId into joinedList
+                                 from b in joinedList.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     ProductId = a.Id,
+                                     Description = a.Description,
+                                     Brand = b?.Brand,
+                                     Supplier = b?.Supplier,
+                                     Quantity = b?.Quantity,
+                                     Price = b?.Price.ToString(),
+                                     DateAdded = b?.DateAdded,
+                                     DateExpired = b?.DateExpired,
+                                 }).ToList();
+
+
+                foreach (var item in _itemList)
                 {
                     var obj = new
                     {
                         Id = item.ProductId,
                         Description = item.Description,
-                        Brand = item.Brand,
-                        Supplier = item.Supplier,
-                        Quantity = item.Quantity,
-                        Price = item.Price.ToString(),
-                        DateAdded = global.FormatDateMMDDYYYY(item.DateAdded),
-                        DateExpired = global.FormatDateMMDDYYYY(item.DateExpired),
+                        Brand = item.Brand == null ? "" : item.Brand,
+                        Supplier = item.Supplier == null ? "" : item.Supplier,
+                        Quantity = item.Quantity == null ? 0 : item.Quantity,
+                        Price = item.Price == null ? "0.00" : item.Price,
+                        DateAdded = item.DateAdded == null ? "" : item.DateAdded,
+                        DateExpired = item.DateExpired == null ? "" : item.DateExpired,
                     };
                     data.Add(obj);
                 }
@@ -67,23 +87,6 @@ namespace Point_of_Sale.Controllers
             }
             else
             {
-                var _list = db.tbl_item.ToList();
-
-                foreach (var item in _list)
-                {
-                    var obj = new
-                    {
-                        Id = item.Id,
-                        Description = item.Description,
-                        Brand = db.tbl_brand.Where(x => x.Id == item.BrandId).FirstOrDefault().Description,
-                        Supplier = db.tbl_supplier.Where(x => x.Id == item.SupplierId).FirstOrDefault().Description,
-                        Quantity = 0,
-                        Price = "0.00",
-                        DateAdded = "",
-                        DateExpired = "",
-                    };
-                    data.Add(obj);
-                }
                 return Json(new { data = data });
             }
         }
@@ -103,8 +106,8 @@ namespace Point_of_Sale.Controllers
                     Supplier = item.Supplier,
                     Quantity = item.Quantity,
                     Price = item.Price.ToString(),
-                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded),
-                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired),
+                    DateAdded = item.DateAdded,
+                    DateExpired = item.DateExpired,
                 };
                 data.Add(obj);
             }

@@ -7,9 +7,6 @@ namespace Point_of_Sale.Interface
 {
     public interface IProducts
     {
-        List<ProductsDTO> GetItems();
-
-        List<ProductsDTO> GetItemDetails();
 
         bool SaveItem(tbl_Item item);
 

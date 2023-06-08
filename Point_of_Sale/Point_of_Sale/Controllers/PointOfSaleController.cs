@@ -109,6 +109,8 @@ namespace Point_of_Sale.Controllers
         {
             try
             {
+                ResultDTO result = new ResultDTO(); 
+
                 var AmountTotal = 0.00M;
 
                 using (var ts = db.Database.BeginTransaction())
@@ -126,14 +128,20 @@ namespace Point_of_Sale.Controllers
                                 ts.Rollback();
                                 ts.Dispose();
                             }
-                            bool product = pos.DeductItem(InvoiceId);
-                            if (!product)
+                            else
                             {
-                                ts.Rollback();
-                                ts.Dispose();
+                                // Deduct Quantity
+                                result = pos.DeductQuantity(InvoiceId);
+                                if (!result.IsSuccess)
+                                {
+                                    ts.Rollback();
+                                    ts.Dispose();
+                                }
+                                else
+                                {
+                                    ts.Commit();
+                                }
                             }
-                            ts.Commit();
-
                             AmountTotal = pos.GetTotalAmount(InvoiceId);
                         }
                     }
@@ -143,7 +151,15 @@ namespace Point_of_Sale.Controllers
                         ts.Dispose();
                     }
                 }
-                return Json(new { success = true, TotalAmount = AmountTotal });
+                if (result.IsSuccess)
+                {
+                    return Json(new { success = true, TotalAmount = AmountTotal });
+                }
+                else
+                {
+                    return Json(new { success = false, message = result.Message });
+                }
+               
             }
             catch (Exception ex)
             {

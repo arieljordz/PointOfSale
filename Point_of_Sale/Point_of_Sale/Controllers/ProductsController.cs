@@ -24,7 +24,7 @@ namespace Point_of_Sale.Controllers
 
         public IActionResult LoadItems()
         {
-            var list = pro.GetItems();
+            var list = global.GetItems();
 
             List<object> data = new List<object>();
             foreach (var item in list)
@@ -44,13 +44,12 @@ namespace Point_of_Sale.Controllers
         public IActionResult LoadItemDtls()
         {
             List<object> data = new List<object>();
-            //var list = pro.GetItemDetails();
 
             var _list = db.tbl_item.ToList();
 
             if (_list != null)
             {
-                var ItemDetails = pro.GetItemDetails();
+                var ItemDetails = global.GetItemDetails();
 
                 var _itemList = (from a in _list
                                  join b in ItemDetails on a.Id equals b.ProductId into joinedList
@@ -93,7 +92,7 @@ namespace Point_of_Sale.Controllers
 
         public IActionResult LoadItemDtlsss()
         {
-            var list = pro.GetItemDetails();
+            var list = global.GetItemDetails();
 
             List<object> data = new List<object>();
             foreach (var item in list)

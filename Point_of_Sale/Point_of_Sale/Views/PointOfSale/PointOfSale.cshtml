@@ -515,7 +515,7 @@
                                     $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
                                     LoadItems();
                                 } else {
-                                    Swal.fire('Error!', res.msg, 'error');
+                                    Swal.fire('Error!', res.message, 'error');
                                 }
                                 window.onload = function () {
                                     var card = document.getElementById('card_balance');

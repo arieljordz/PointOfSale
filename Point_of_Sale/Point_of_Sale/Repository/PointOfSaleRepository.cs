@@ -7,6 +7,9 @@ using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
 using System.Globalization;
+using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
+using static iTextSharp.text.pdf.AcroFields;
+using Point_of_Sale.DTO;
 
 namespace Point_of_Sale.Repository
 {
@@ -14,11 +17,13 @@ namespace Point_of_Sale.Repository
     {
         private readonly PointOfSaleDbContext db;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IGlobal global;
 
-        public PointOfSaleRepository(PointOfSaleDbContext context, IWebHostEnvironment hostingEnvironment)
+        public PointOfSaleRepository(PointOfSaleDbContext context, IWebHostEnvironment hostingEnvironment, IGlobal global_rep)
         {
             db = context;
             _hostingEnvironment = hostingEnvironment;
+            global = global_rep;
         }
 
         public int SaveInvoice(int UserId)
@@ -75,29 +80,9 @@ namespace Point_of_Sale.Repository
                     db.SaveChanges();
                 }
 
-                db.tbl_cart.RemoveRange(cart);
-                db.SaveChanges();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public bool DeductItem(int InvoiceId)
-        {
-            var cart = db.tbl_invoice.Where(x => x.Id == InvoiceId).SingleOrDefault();
-            try
-            {
-                var sales = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId).ToList();
-                foreach (var item in sales)
+                if (cart != null)
                 {
-                    var totalQty = GetAvailableItem(item.Quantity, item.ProductId);
-
-                    var product = db.tbl_item.Where(x => x.Id == item.ProductId).SingleOrDefault();
-                    //product.Quantity = totalQty;
+                    db.tbl_cart.RemoveRange(cart);
                     db.SaveChanges();
                 }
                 return true;
@@ -108,54 +93,68 @@ namespace Point_of_Sale.Repository
             }
         }
 
+        public ResultDTO DeductQuantity(int InvoiceId)
+        {
+            ResultDTO result = new ResultDTO();
+            result.IsSuccess = true;
+            result.Message = "Success";
+
+            var sales = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId).ToList();
+
+            foreach (var item in sales)
+            {
+                var itemDetails = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList();
+                int current_qty = itemDetails.Sum(x => x.Quantity);
+
+                var prod_sales = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId && x.ProductId == item.ProductId).ToList();
+                int sales_qty = prod_sales.Sum(x => x.Quantity);
+
+                if (current_qty >= sales_qty)
+                {
+                    var dtls = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId && x.Quantity >= item.Quantity).FirstOrDefault();
+                    if (dtls != null)
+                    {
+                        dtls.Quantity = dtls.Quantity - item.Quantity;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        result.IsSuccess = false;
+                        result.Message = "The available quantity of the selected item is not enough!";
+                        return result;
+                    }
+                }
+                else
+                {
+                    result.IsSuccess = false;
+                    result.Message = "The available quantity of the selected item is not enough!";
+                    return result;
+                }
+            }
+            return result;
+        }
         public decimal GetTotalAmount(int InvoiceId)
         {
             var TotalAmount = 0.00M;
             var invoice = db.tbl_invoice.Where(x => x.Id == InvoiceId).SingleOrDefault();
-            TotalAmount = invoice.AmountTotal;
-
+            if (invoice != null)
+            {
+                TotalAmount = invoice.AmountTotal;
+            }
             return TotalAmount;
         }
 
         public int GetAvailableItem(int Quantity, int ProductId)
         {
-            var TotalAmount = 0;
-            var product = db.tbl_item.Where(x => x.Id == ProductId).SingleOrDefault();
-            //TotalAmount = product.Quantity - Quantity;
-
-            return TotalAmount;
+            var TotalQuantity = 0;
+            var product = global.GetItemDetails().Where(x => x.ProductId == ProductId).SingleOrDefault();
+            if (product != null)
+            {
+                TotalQuantity = product.Quantity - Quantity;
+            }
+            return TotalQuantity;
         }
 
-        public FileStreamResult GenerateReport()
-        {
-            // Create a new PDF document
-            iTextSharp.text.Document document = new iTextSharp.text.Document();
 
-            // Set the output file path
-            string relativePath = "reports/report.pdf";
-            relativePath = relativePath.Replace("\\", "/");
-            string outputPath = Path.Combine(_hostingEnvironment.WebRootPath, relativePath);
-
-            // Create a new PDF writer
-            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(outputPath, FileMode.Create));
-
-            // Open the PDF document
-            document.Open();
-
-            // Add content to the PDF document
-            document.Add(new Paragraph("Hello, World!"));
-
-            // Close the PDF document
-            document.Close();
-
-            MemoryStream stream = new MemoryStream();
-            byte[] bytes = stream.ToArray();
-            stream.Write(bytes, 0, bytes.Length);
-            stream.Position = 0;
-
-            //return outputPath;
-
-            return new FileStreamResult(stream,"application/pdf");
-        }
     }
 }

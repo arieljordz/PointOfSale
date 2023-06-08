@@ -273,7 +273,18 @@ D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\refint
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.genruntimeconfig.cache
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\ref\Point_of_Sale.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.AssemblyInfo.cs
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.Features.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.Configuration.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.Runtime.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.ServiceModel.Http.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.ServiceModel.Primitives.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\wwwroot\reports\Receipt.rdlc
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\appsettings.Development.json
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\appsettings.json
@@ -282,6 +293,7 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.exe
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.deps.json
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.runtimeconfig.json
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\AspNetCore.Reporting.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\AspNetCore.ReportingServices.dll
@@ -308,7 +320,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Features.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.Features.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.Scripting.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.CodeAnalysis.VisualBasic.dll
@@ -342,13 +353,11 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.Common.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.Configuration.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.DependencyResolver.Core.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.Frameworks.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\NuGet.LibraryModel.dll
@@ -360,9 +369,7 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.AttributedModel.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.Convention.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.Hosting.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.Runtime.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Composition.TypedParts.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Data.SqlClient.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Drawing.Common.dll
@@ -371,8 +378,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Runtime.Caching.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Security.Permissions.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.ServiceModel.Http.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.ServiceModel.Primitives.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.ServiceModel.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\System.Windows.Extensions.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
@@ -472,7 +477,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.VisualBasic.resources.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.resources.dll
@@ -488,7 +492,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
@@ -531,7 +534,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
@@ -553,7 +555,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.csproj.AssemblyReference.cache
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.GeneratedMSBuildEditorConfig.editorconfig
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.AssemblyInfoInputs.cache
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.AssemblyInfo.cs
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.csproj.CoreCompileInputs.cache
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.MvcApplicationPartsAssemblyInfo.cache
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.RazorAssemblyInfo.cache
@@ -567,7 +568,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\staticwebassets.development.json
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\scopedcss\bundle\Point_of_Sale.styles.css
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.csproj.CopyComplete
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\refint\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.genruntimeconfig.cache

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models.DBContext;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGlobal, GlobalRepository>();
 builder.Services.AddScoped<IPointOfSale, PointOfSaleRepository>();
+builder.Services.AddScoped<IProducts, ProductsRepository>();
 builder.Services.AddDbContext<PointOfSaleDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
 

@@ -27,6 +27,7 @@ namespace Point_of_Sale.Controllers
             ViewBag.DateNow = DateTime.Now;
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
+            ViewBag.UserType = Request.Cookies["UserType"];
 
             return View();
         }
@@ -35,28 +36,6 @@ namespace Point_of_Sale.Controllers
         {
             return LoadViews();
         }
-
-        public IActionResult LoadItems()
-        {
-            var list = db.tbl_item.ToList();
-            List<object> data = new List<object>();
-            foreach (var item in list)
-            {
-                var obj = new
-                {
-                    Id = item.Id,
-                    Description = item.Description,
-                    Brand = item.Brand,
-                    Supplier = item.Supplier,
-                    Quantity = item.Quantity,
-                    Price = item.Price.ToString(),
-                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
-                };
-                data.Add(obj);
-            }
-            return Json(new { data = data });
-        }
-
 
         public IActionResult LoadCart()
         {
@@ -130,6 +109,8 @@ namespace Point_of_Sale.Controllers
         {
             try
             {
+                ResultDTO result = new ResultDTO(); 
+
                 var AmountTotal = 0.00M;
 
                 using (var ts = db.Database.BeginTransaction())
@@ -147,14 +128,20 @@ namespace Point_of_Sale.Controllers
                                 ts.Rollback();
                                 ts.Dispose();
                             }
-                            bool product = pos.DeductItem(InvoiceId);
-                            if (!product)
+                            else
                             {
-                                ts.Rollback();
-                                ts.Dispose();
+                                // Deduct Quantity
+                                result = pos.DeductQuantity(InvoiceId);
+                                if (!result.IsSuccess)
+                                {
+                                    ts.Rollback();
+                                    ts.Dispose();
+                                }
+                                else
+                                {
+                                    ts.Commit();
+                                }
                             }
-                            ts.Commit();
-
                             AmountTotal = pos.GetTotalAmount(InvoiceId);
                         }
                     }
@@ -164,7 +151,15 @@ namespace Point_of_Sale.Controllers
                         ts.Dispose();
                     }
                 }
-                return Json(new { success = true, TotalAmount = AmountTotal });
+                if (result.IsSuccess)
+                {
+                    return Json(new { success = true, TotalAmount = AmountTotal });
+                }
+                else
+                {
+                    return Json(new { success = false, message = result.Message });
+                }
+               
             }
             catch (Exception ex)
             {

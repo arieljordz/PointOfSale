@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SECdeDobLioFzVEijguHXYGtU3eTe9BNz+y8lVkX3uo=",
+  "Hash": "lMKbcxtWkKjGEfqu3n4CUhImvpWJqUop96GwTF8rI+U=",
   "Source": "Point_of_Sale",
   "BasePath": "_content/Point_of_Sale",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\images\\img\\ajax-loading.gif",
+      "SourceId": "Point_of_Sale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\",
+      "BasePath": "_content/Point_of_Sale",
+      "RelativePath": "images/img/ajax-loading.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\img\\ajax-loading.gif"
     },
     {
       "Identity": "D:\\MY PROJECTS\\GIT-POINT_OF_SALE\\PointOfSale\\Point_of_Sale\\Point_of_Sale\\wwwroot\\images\\img\\minus.png",

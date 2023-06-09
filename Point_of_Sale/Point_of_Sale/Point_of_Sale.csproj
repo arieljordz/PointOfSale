@@ -7,14 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\reports\ListOfProducts.rdlc" />
+    <Content Remove="wwwroot\reports\ListOfProductsPerQty.rdlc" />
+    <Content Remove="wwwroot\reports\ListOfSoldProducts.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\img\minus.png" />
     <None Include="wwwroot\images\img\plus.png" />
+    <None Include="wwwroot\reports\ListOfProducts.rdlc" />
+    <None Include="wwwroot\reports\ListOfProductsPerQty.rdlc" />
+    <None Include="wwwroot\reports\ListOfSoldProducts.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.16">
@@ -48,6 +58,10 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>POSDBDataSet.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Products\" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Mvc;
+using Point_of_Sale.DTO;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models;
 using Point_of_Sale.Models.DBContext;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace Point_of_Sale.Controllers
 {
@@ -9,92 +13,90 @@ namespace Point_of_Sale.Controllers
     {
         private readonly PointOfSaleDbContext db;
         private readonly IGlobal global;
+        private readonly IProducts pro;
 
-        public ProductsController(PointOfSaleDbContext context, IGlobal global_rep)
+        public ProductsController(PointOfSaleDbContext context, IGlobal global_rep, IProducts pro_rep)
         {
             db = context;
             global = global_rep;
-        }
-        public IActionResult LoadViews()
-        {
-            ViewBag.DateNow = DateTime.Now;
-            ViewBag.Username = Request.Cookies["FullName"];
-            ViewBag.UserId = Request.Cookies["UserId"];
-
-            return View();
-        }
-
-        public IActionResult ProductDetails()
-        {
-            return LoadViews();
+            pro = pro_rep;
         }
 
         public IActionResult LoadItems()
         {
-            var list = db.tbl_item.ToList();
+            var list = global.GetItems();
+
             List<object> data = new List<object>();
             foreach (var item in list)
             {
                 var obj = new
                 {
-                    Id = item.Id,
+                    Id = item.ProductId,
                     Description = item.Description,
                     Brand = item.Brand,
                     Supplier = item.Supplier,
-                    Quantity = item.Quantity,
-                    Price = item.Price.ToString(),
-                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
-                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
                 };
                 data.Add(obj);
             }
             return Json(new { data = data });
         }
 
+        public IActionResult LoadItemDtls()
+        {
+            List<object> data = new List<object>();
+
+            var _list = (from a in db.tbl_item
+                         join b in db.tbl_brand
+                         on a.BrandId equals b.Id
+                         join c in db.tbl_supplier
+                         on a.SupplierId equals c.Id
+                         select new
+                         {
+                             ProductId = a.Id,
+                             Description = a.Description,
+                             Brand = b.Description,
+                             Supplier = c.Description,
+                             Quantity = a.Quantity,
+                             Price = a.Price.ToString(),
+                             DateExpired = a.DateExpired,
+                         }).ToList();
+
+            if (_list != null)
+            {
+                foreach (var item in _list)
+                {
+                    var obj = new
+                    {
+                        Id = item.ProductId,
+                        Description = item.Description,
+                        Brand = item.Brand == null ? "" : item.Brand,
+                        Supplier = item.Supplier == null ? "" : item.Supplier,
+                        Quantity = item.Quantity == null ? 0 : item.Quantity,
+                        Price = item.Price == null ? "0.00" : item.Price,
+                        DateAdded = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList().Max(x=>x.DateAdded).ToShortDateString(),
+                        DateExpired = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList().Max(x => x.DateExpired).ToShortDateString(),
+                    };
+                    data.Add(obj);
+                }
+                return Json(new { data = data });
+            }
+            else
+            {
+                return Json(new { data = data });
+            }
+        }
+
         [HttpPost]
         public IActionResult SaveItem(tbl_Item item)
         {
-            try
+            bool result = pro.SaveItem(item);
+            if (result)
             {
-                if (item.Id != 0)
-                {
-                    var qry = db.tbl_item.Where(x => x.Id == item.Id).SingleOrDefault();
-                    qry.Description = item.Description;
-                    qry.Brand = item.Brand;
-                    qry.Supplier = item.Supplier;
-                    qry.Quantity = item.Quantity;
-                    qry.Price = item.Price;
-                    qry.DateExpired = item.DateExpired;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    item.DateAdded = DateTime.Now;
-                    db.tbl_item.Add(item);
-                    db.SaveChanges();
-
-                }
                 return Json(new { success = true });
-
             }
-            catch (Exception ex)
+            else
             {
-                return Json(new { success = false, message = ex.Message });
-            }
-
-        }
-
-
-        public IActionResult UpdateItem(int Id)
-        {
-            try
-            {
-                var data = db.tbl_item.Where(x => x.Id == Id).SingleOrDefault();
-                return Json(new { data = data });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message });
+                return Json(new { success = false, message = "Error in saving." });
             }
         }
 
@@ -113,7 +115,19 @@ namespace Point_of_Sale.Controllers
             }
         }
 
-
+        [HttpPost]
+        public IActionResult SaveItemDetails(tbl_ItemDetails dtls)
+        {
+            bool result = pro.SaveItemDetails(dtls);
+            if (result)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error in saving." });
+            }
+        }
 
     }
 }

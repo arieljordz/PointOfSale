@@ -27,6 +27,25 @@ function ActiveMenu(id) {
         }
     }, 100);
 }
+function LogOut() {
+    Swal.fire({
+        text: "Are you sure you want to log out?",
+        icon: 'warning',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#loader").show();
+            setTimeout(function () {
+                window.location.href = "/Account/Account";
+            }, 1000);
+        }
+    });
+}
 
 function SelectedValue(DataTableID, rowData) {
     var row = $("#" + DataTableID).find(".dtactive");

@@ -20,6 +20,7 @@ namespace Point_of_Sale.Controllers
             ViewBag.DateNow = DateTime.Now;
             ViewBag.Username = Request.Cookies["FullName"];
             ViewBag.UserId = Request.Cookies["UserId"];
+            ViewBag.UserType = Request.Cookies["UserType"];
 
             return View();
         }
@@ -39,12 +40,12 @@ namespace Point_of_Sale.Controllers
                 {
                     Id = item.Id,
                     Description = item.Description,
-                    Brand = item.Brand,
-                    Supplier = item.Supplier,
-                    Quantity = item.Quantity,
-                    Price = item.Price.ToString(),
-                    DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
-                    DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
+                    Brand = item.BrandId,
+                    Supplier = item.SupplierId,
+                    //Quantity = item.Quantity,
+                    //Price = item.Price.ToString(),
+                    //DateAdded = global.FormatDateMMDDYYYY(item.DateAdded.ToShortDateString()),
+                    //DateExpired = global.FormatDateMMDDYYYY(item.DateExpired.ToShortDateString()),
                 };
                 data.Add(obj);
             }

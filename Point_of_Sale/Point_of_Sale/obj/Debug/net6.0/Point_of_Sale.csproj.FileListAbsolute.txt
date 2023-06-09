@@ -273,7 +273,7 @@ D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\refint
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.genruntimeconfig.cache
 D:\MY PROJECTS\POINT_OF_SALE\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\ref\Point_of_Sale.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\wwwroot\reports\Receipt.rdlc
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\appsettings.Development.json
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\appsettings.json
@@ -282,8 +282,6 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.exe
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.deps.json
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.runtimeconfig.json
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.dll
-D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\AspNetCore.Reporting.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\AspNetCore.ReportingServices.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\BouncyCastle.Crypto.dll
@@ -533,6 +531,7 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
@@ -571,4 +570,5 @@ D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Deb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\refint\Point_of_Sale.dll
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\Point_of_Sale.genruntimeconfig.cache
+D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\bin\Debug\net6.0\Point_of_Sale.pdb
 D:\MY PROJECTS\GIT-POINT_OF_SALE\PointOfSale\Point_of_Sale\Point_of_Sale\obj\Debug\net6.0\ref\Point_of_Sale.dll

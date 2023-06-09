@@ -22,6 +22,70 @@ namespace Point_of_Sale.Models.DBContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Point_of_Sale.Models.sp_generated_list", b =>
+                {
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateAdded")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateExpired")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateInvoiced")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("sp_generated_list");
+                });
+
+            modelBuilder.Entity("Point_of_Sale.Models.sp_get_items", b =>
+                {
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateAdded")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateExpired")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("sp_get_items");
+                });
+
             modelBuilder.Entity("Point_of_Sale.Models.sp_receipt", b =>
                 {
                     b.Property<string>("Description")
@@ -55,6 +119,22 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.ToTable("tbl_bank");
                 });
 
+            modelBuilder.Entity("Point_of_Sale.Models.tbl_Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_brand");
+                });
+
             modelBuilder.Entity("Point_of_Sale.Models.tbl_Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -81,6 +161,31 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_cart");
+                });
+
+            modelBuilder.Entity("Point_of_Sale.Models.tbl_Inventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateExpired")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_inventory");
                 });
 
             modelBuilder.Entity("Point_of_Sale.Models.tbl_Invoice", b =>
@@ -131,8 +236,36 @@ namespace Point_of_Sale.Models.DBContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Brand")
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateExpired")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_item");
+                });
+
+            modelBuilder.Entity("Point_of_Sale.Models.tbl_ItemDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
@@ -140,21 +273,18 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.Property<DateTime>("DateExpired")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Supplier")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_item");
+                    b.ToTable("tbl_itemDetails");
                 });
 
             modelBuilder.Entity("Point_of_Sale.Models.tbl_PaymentType", b =>
@@ -199,6 +329,22 @@ namespace Point_of_Sale.Models.DBContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_sales");
+                });
+
+            modelBuilder.Entity("Point_of_Sale.Models.tbl_Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_supplier");
                 });
 
             modelBuilder.Entity("Point_of_Sale.Models.tbl_User", b =>

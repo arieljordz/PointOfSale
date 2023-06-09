@@ -22,9 +22,9 @@ namespace Point_of_Sale.Controllers
         public IActionResult LoadViews()
         {
             ViewBag.DateNow = DateTime.Now;
-            ViewBag.Username = Request.Cookies["FullName"];
-            ViewBag.UserId = Request.Cookies["UserId"];
-            ViewBag.UserType = Request.Cookies["UserType"];
+            ViewBag.Username = HttpContext.Session.GetString("FullName");
+            ViewBag.UserId = HttpContext.Session.GetString("UserId");
+            ViewBag.UserType = HttpContext.Session.GetString("UserType");
             var userType = db.tbl_userType.ToList();
             ViewBag.cmbUserType = new SelectList(userType, "UsertypeId", "Description");
 

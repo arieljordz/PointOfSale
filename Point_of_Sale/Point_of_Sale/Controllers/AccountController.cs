@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Point_of_Sale.Interface;
 using Point_of_Sale.Models.DBContext;
@@ -35,18 +36,22 @@ namespace Point_of_Sale.Controllers
                 //DateTime dateNow = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
                 // Create a new cookie
-                var cookieOptions = new CookieOptions
-                {
-                    // Set additional options if needed
-                    Expires = DateTime.Now.AddMinutes(30),
-                    Secure = true,
-                    HttpOnly = true
-                };
+                //var cookieOptions = new CookieOptions
+                //{
+                //    // Set additional options if needed
+                //    Expires = DateTime.Now.AddMinutes(30),
+                //    Secure = true,
+                //    HttpOnly = true
+                //};
                 var UserType = db.tbl_userType.Where(x => x.Id == qry.UsertypeId).FirstOrDefault().Description;
                 // Add the cookie to the response
-                Response.Cookies.Append("FullName", qry.FullName, cookieOptions);
-                Response.Cookies.Append("UserType", UserType, cookieOptions);
-                Response.Cookies.Append("UserId", qry.Id.ToString(), cookieOptions);
+                //Response.Cookies.Append("FullName", qry.FullName, cookieOptions);
+                //Response.Cookies.Append("UserType", UserType, cookieOptions);
+                //Response.Cookies.Append("UserId", qry.Id.ToString(), cookieOptions);
+
+                HttpContext.Session.SetString("FullName", qry.FullName);
+                HttpContext.Session.SetString("UserType", UserType);
+                HttpContext.Session.SetString("UserId", qry.Id.ToString());
 
                 if (UsertypeId == 1)
                 {

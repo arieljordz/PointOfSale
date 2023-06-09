@@ -92,6 +92,22 @@ namespace Point_of_Sale.Controllers
 
                 return File(result.MainStream, "application/pdf");
             }
+            else if (typeId == 3)
+            {
+                var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\ListOfProductsPerQty.rdlc";
+
+                var sp_list = db.sp_generated_list.FromSqlRaw("EXEC sp_generated_list {0},{1},{2}", typeId, dateFrom, dateTo).ToList();
+
+                LocalReport localReport = new LocalReport(path);
+
+                parameters.Add("listname", "List of Products per Quantity");
+
+                localReport.AddDataSource("ds_list_of_products_qty", sp_list);
+
+                var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
+                return File(result.MainStream, "application/pdf");
+            }
             else
             {
                 var path = $"{webHostEnvirnoment.WebRootPath}\\reports\\ListOfProducts.rdlc";

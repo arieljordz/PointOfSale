@@ -257,6 +257,7 @@
     <script>
         $(document).ready(function () {
             var SalesId = 0;
+            var IsCartEmpty = true;
             var date = GetDateNowMMDDYYYY();
             var UserId = $("[name='UserId']").val();
 
@@ -423,6 +424,17 @@
                         "datatype": "JSON",
                     },
                     drawCallback: function (settings) {
+                        var table = $(this);
+
+                        if (table.DataTable().rows().data().length === 0) {
+                            IsCartEmpty = true;
+                        }
+                        else
+                        {
+                            IsCartEmpty = false;
+                        }
+                        console.log(IsCartEmpty);
+
                         if (settings.json != undefined) {
                             var json = settings.json;
                             var Total = 0.00;
@@ -498,69 +510,41 @@
 
             $("#btn_checkout").click(function (e) {
                 e.preventDefault();
-                Swal.fire({
-                    text: "Are you sure you want to proceed?",
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#dc3545',
-                    confirmButtonText: 'Yes'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '../PointOfSale/Checkout?&UserId=' + UserId,
-                            type: 'POST',
-                            success: function (res) {
-                                if (res.success == true) {
-                                    $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
-                                    LoadItems();
-                                } else {
-                                    Swal.fire('Error!', res.message, 'error');
+                if (!IsCartEmpty) {
+                    Swal.fire({
+                        text: "Are you sure you want to proceed?",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#28a745',
+                        cancelButtonColor: '#dc3545',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '../PointOfSale/Checkout?&UserId=' + UserId,
+                                type: 'POST',
+                                success: function (res) {
+                                    if (res.success == true) {
+                                        $("[name='TotalAmount']").val(TextMoneyFormat(res.totalAmount));
+                                        LoadItems();
+                                    } else {
+                                        Swal.fire('Error!', res.message, 'error');
+                                    }
+                                    window.onload = function () {
+                                        var card = document.getElementById('card_balance');
+                                        $("[name='AmountPaid']").focus();
+                                        card.focus();
+                                    };
                                 }
-                                window.onload = function () {
-                                    var card = document.getElementById('card_balance');
-                                    $("[name='AmountPaid']").focus();
-                                    card.focus();
-                                };
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
+                }
+                else
+                {
+                    Swal.fire('Warning!', "You don't have items to be checkout.", 'warning');
+                }
             });
-
-            ValidateAmount();
-            function ValidateAmount() {
-                $.validator.setDefaults({
-                    submitHandler: function () {
-                        GetBalance();
-                    }
-                });
-                $('#form_cart').validate({
-                    rules: {
-                        AmountPaid: {
-                            required: true
-                        },
-                    },
-                    messages: {
-                        AmountPaid: {
-                            required: "This field is required"
-                        },
-                    },
-                    errorElement: 'span',
-                    errorPlacement: function (error, element) {
-                        error.addClass('invalid-feedback');
-                        element.closest('.form-group').append(error);
-                    },
-                    highlight: function (element, errorClass, validClass) {
-                        $(element).addClass('is-invalid');
-                        console.log(element);
-                    },
-                    unhighlight: function (element, errorClass, validClass) {
-                        $(element).removeClass('is-invalid');
-                        console.log(element);
-                    }
-                });
-            }
 
             function AmountDetails() {
                 var formData = new FormData();
@@ -568,6 +552,16 @@
                 formData.append('AmountPaid', $("[name='AmountPaid']").val());
                 return formData;
             }
+
+            $("[name='AmountPaid']").keyup(function () {
+                var AmountPaid = parseFloat($("[name='AmountPaid']").val()) || 0;
+                var TotalAmountPaid = parseFloat($("[name='TotalAmount']").val()) || 0;
+                if (AmountPaid != 0) {
+                    $("[name='Balance']").val((AmountPaid - TotalAmountPaid));
+                } else {
+                    $("[name='Balance']").val("");
+                }
+            });
 
             function GetBalance() {
                 $.ajax({
@@ -581,6 +575,7 @@
                                 showCancelButton: true,
                                 confirmButtonColor: '#28a745',
                                 cancelButtonColor: '#dc3545',
+                                allowOutsideClick: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 $("[name='Balance']").val(TextMoneyFormat(res.balance));
@@ -602,7 +597,17 @@
 
             $("#btn_get_balance").click(function (e) {
                 e.preventDefault();
-                GetBalance();
+                var TotalAmountPaid = parseFloat($("[name='TotalAmount']").val()) || 0;
+                var change = parseFloat($("[name='Balance']").val()) || 0;
+                console.log(change);
+                if (change <= TotalAmountPaid) {
+                    if (change >= 0) {
+                        console.log("GetBalance");
+                        GetBalance();
+                    } else {
+                        Swal.fire("Warning!", "The Amount Paid must be greater than or equal to Total Amount Payable.", "warning");
+                    }
+                }
             });
 
         });

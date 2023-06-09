@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\reports\ListOfProducts.rdlc" />
+    <Content Remove="wwwroot\reports\ListOfProductsPerQty.rdlc" />
     <Content Remove="wwwroot\reports\ListOfSoldProducts.rdlc" />
   </ItemGroup>
 
@@ -15,6 +16,7 @@
     <None Include="wwwroot\images\img\minus.png" />
     <None Include="wwwroot\images\img\plus.png" />
     <None Include="wwwroot\reports\ListOfProducts.rdlc" />
+    <None Include="wwwroot\reports\ListOfProductsPerQty.rdlc" />
     <None Include="wwwroot\reports\ListOfSoldProducts.rdlc" />
   </ItemGroup>
 

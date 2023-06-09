@@ -14,5 +14,12 @@ namespace Point_of_Sale.Models
         public int BrandId { get; set; }
 
         public int SupplierId { get; set; }
+
+        public int? Quantity { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal? Price { get; set; }
+
+        public DateTime? DateExpired { get; set; }
     }
 }

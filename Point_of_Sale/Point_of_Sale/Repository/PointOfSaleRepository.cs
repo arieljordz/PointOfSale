@@ -10,6 +10,7 @@ using System.Globalization;
 using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
 using static iTextSharp.text.pdf.AcroFields;
 using Point_of_Sale.DTO;
+using System.Web.Helpers;
 
 namespace Point_of_Sale.Repository
 {
@@ -79,7 +80,6 @@ namespace Point_of_Sale.Repository
                     db.tbl_sales.Add(sales);
                     db.SaveChanges();
                 }
-
                 if (cart != null)
                 {
                     db.tbl_cart.RemoveRange(cart);
@@ -103,32 +103,21 @@ namespace Point_of_Sale.Repository
 
             foreach (var item in sales)
             {
-                var itemDetails = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList();
-                int current_qty = itemDetails.Sum(x => x.Quantity);
-
-                var prod_sales = db.tbl_sales.Where(x => x.InvoiceId == InvoiceId && x.ProductId == item.ProductId).ToList();
-                int sales_qty = prod_sales.Sum(x => x.Quantity);
-
-                if (current_qty >= sales_qty)
+                var dtls = db.tbl_item.Where(x => x.Id == item.ProductId && x.Quantity >= item.Quantity).FirstOrDefault();
+                if (dtls != null)
                 {
-                    var dtls = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId && x.Quantity >= item.Quantity).FirstOrDefault();
-                    if (dtls != null)
-                    {
-                        dtls.Quantity = dtls.Quantity - item.Quantity;
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        result.IsSuccess = false;
-                        result.Message = "The available quantity of the selected item is not enough!";
-                        return result;
-                    }
+                    dtls.Quantity = dtls.Quantity - item.Quantity;
+                    db.SaveChanges();
                 }
                 else
                 {
-                    result.IsSuccess = false;
-                    result.Message = "The available quantity of the selected item is not enough!";
-                    return result;
+                    var itemDesc = db.tbl_item.Where(x => x.Id == item.ProductId).FirstOrDefault().Description;
+                    if (itemDesc != null)
+                    {
+                        result.IsSuccess = false;
+                        result.Message = "The available quantity of " + itemDesc + " is not enough!";
+                        return result;
+                    }
                 }
             }
             return result;

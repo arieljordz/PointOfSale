@@ -45,29 +45,25 @@ namespace Point_of_Sale.Controllers
         {
             List<object> data = new List<object>();
 
-            var _list = db.tbl_item.ToList();
+            var _list = (from a in db.tbl_item
+                         join b in db.tbl_brand
+                         on a.BrandId equals b.Id
+                         join c in db.tbl_supplier
+                         on a.SupplierId equals c.Id
+                         select new
+                         {
+                             ProductId = a.Id,
+                             Description = a.Description,
+                             Brand = b.Description,
+                             Supplier = c.Description,
+                             Quantity = a.Quantity,
+                             Price = a.Price.ToString(),
+                             DateExpired = a.DateExpired,
+                         }).ToList();
 
             if (_list != null)
             {
-                var ItemDetails = global.GetItemDetails();
-
-                var _itemList = (from a in _list
-                                 join b in ItemDetails on a.Id equals b.ProductId into joinedList
-                                 from b in joinedList.DefaultIfEmpty()
-                                 select new
-                                 {
-                                     ProductId = a.Id,
-                                     Description = a.Description,
-                                     Brand = b?.Brand,
-                                     Supplier = b?.Supplier,
-                                     Quantity = b?.Quantity,
-                                     Price = b?.Price.ToString(),
-                                     DateAdded = b?.DateAdded,
-                                     DateExpired = b?.DateExpired,
-                                 }).ToList();
-
-
-                foreach (var item in _itemList)
+                foreach (var item in _list)
                 {
                     var obj = new
                     {
@@ -77,8 +73,8 @@ namespace Point_of_Sale.Controllers
                         Supplier = item.Supplier == null ? "" : item.Supplier,
                         Quantity = item.Quantity == null ? 0 : item.Quantity,
                         Price = item.Price == null ? "0.00" : item.Price,
-                        DateAdded = item.DateAdded == null ? "" : item.DateAdded,
-                        DateExpired = item.DateExpired == null ? "" : item.DateExpired,
+                        DateAdded = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList().Max(x=>x.DateAdded).ToShortDateString(),
+                        DateExpired = db.tbl_itemDetails.Where(x => x.ProductId == item.ProductId).ToList().Max(x => x.DateExpired).ToShortDateString(),
                     };
                     data.Add(obj);
                 }
@@ -89,30 +85,6 @@ namespace Point_of_Sale.Controllers
                 return Json(new { data = data });
             }
         }
-
-        public IActionResult LoadItemDtlsss()
-        {
-            var list = global.GetItemDetails();
-
-            List<object> data = new List<object>();
-            foreach (var item in list)
-            {
-                var obj = new
-                {
-                    Id = item.ProductId,
-                    Description = item.Description,
-                    Brand = item.Brand,
-                    Supplier = item.Supplier,
-                    Quantity = item.Quantity,
-                    Price = item.Price.ToString(),
-                    DateAdded = item.DateAdded,
-                    DateExpired = item.DateExpired,
-                };
-                data.Add(obj);
-            }
-            return Json(new { data = data });
-        }
-
 
         [HttpPost]
         public IActionResult SaveItem(tbl_Item item)

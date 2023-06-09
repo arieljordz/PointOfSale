@@ -11,6 +11,7 @@ using Point_of_Sale.DTO;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using NuGet.Protocol.Core.Types;
+using System.Web.Helpers;
 
 namespace Point_of_Sale.Repository
 {
@@ -44,6 +45,8 @@ namespace Point_of_Sale.Repository
                 }
                 else
                 {
+                    item.Quantity = 0;
+                    item.Price = 0;
                     db.tbl_item.Add(item);
                     db.SaveChanges();
                     return true;
@@ -68,6 +71,15 @@ namespace Point_of_Sale.Repository
                 db.tbl_itemDetails.Add(dtls);
                 db.SaveChanges();
 
+                var prod = db.tbl_item.Where(x => x.Id == dtls.ProductId).SingleOrDefault();
+                if (prod != null)
+                {
+                    var itemdtls = db.tbl_itemDetails.Where(x => x.ProductId == dtls.ProductId).ToList();
+                    prod.Quantity = dtls.Quantity + prod.Quantity;
+                    prod.Price = itemdtls.Max(x => x.Price);
+                    prod.DateExpired = itemdtls.Max(x => x.DateExpired);
+                    db.SaveChanges();
+                }
                 return true;
             }
             catch (Exception ex)

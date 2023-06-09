@@ -53,10 +53,10 @@ namespace Point_of_Sale.Controllers
                     //return RedirectToAction("Dashboard", "Home");
                     //return RedirectToAction("ProductDetails", "Products");
                     //return RedirectToAction("User", "FileMaintenance");
-                    //return RedirectToAction("PointOfSale", "PointOfSale");
+                    return RedirectToAction("PointOfSale", "PointOfSale");
                     //return RedirectToAction("Inventory", "Inventory");
                     //return RedirectToAction("Collection", "Collection");
-                    return RedirectToAction("ProductDetails", "FileMaintenance");
+                    //return RedirectToAction("ProductDetails", "FileMaintenance");
                 }
                 else
                 {
